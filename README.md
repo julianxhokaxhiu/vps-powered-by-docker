@@ -1,6 +1,10 @@
 # vps-powered-by-docker
 Arch Linux setup script to obtain a full VPS with Mail and Rancher server without pain
 
+## Stack
+- Rancher 1.0 as Docker Server management ( http://rancher.com/ )
+- Poste as Mail Server ( https://poste.io )
+
 ## Usage
 ```
 wget https://raw.githubusercontent.com/julianxhokaxhiu/vps-powered-by-docker/master/install.sh
