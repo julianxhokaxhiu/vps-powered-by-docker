@@ -12,3 +12,12 @@ Edit the [configuration variables](https://github.com/julianxhokaxhiu/vps-powere
 chmod +x install.sh
 ./install.sh
 ```
+
+## Links
+- http://docker.lan/ for the Rancher Server
+- https://mail.lan/admin/login for the Mail Server Admin panel
+- http://mail.lan/ or https://mail.lan/ for the Email access
+
+## Disclaimer
+- The domains logic depends on your configuration that you may have done before running the `install` script.
+- The mapping of the domains to the IP is considered done already externally to this project.
