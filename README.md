@@ -23,5 +23,5 @@ chmod +x install.sh
 - http://mail.lan/ or https://mail.lan/ for the Email access
 
 ## Disclaimer
-- The domains logic depends on your configuration that you may have done before running the `install` script.
-- The mapping of the domains to the IP is considered done already externally to this project.
+- The domains in the [Links](#links) section depends on your configuration that you may have done before running the `install.sh` script. By default, it assumes the ones declared in the script.
+- The mapping of the domains to the Host IP is considered done already externally to this project ( through DNS Server or statically inside your `hosts` file )
