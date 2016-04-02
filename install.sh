@@ -51,7 +51,7 @@ docker run \
     rancher/server:v1.0.0 &>/dev/null
 
 # Register Rancher Agent
-echo ">> Running Rancher agent..."
+echo ">> Running Rancher Agent..."
 docker run \
     --name="register-$RANCHER_AGENT_NAME" \
     --link=$RANCHER_SERVER_NAME \
