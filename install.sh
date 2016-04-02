@@ -5,7 +5,7 @@ local RANCHER_DOMAIN="docker.lan"
 local MAILSERVER_DOMAIN="mail.lan"
 
 # Install Docker
-yes '' | pacman -Sy docker --noprogressbar --noconfirm --needed
+yes '' | pacman -Sy --noprogressbar --noconfirm --needed docker openssl
 
 # Enable and Start docker host service
 systemctl enable docker.service
