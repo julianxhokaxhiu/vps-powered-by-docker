@@ -103,4 +103,6 @@ until [ "$(/usr/bin/docker inspect -f {{.State.Running}} rancher-agent)"=="true"
 done;
 
 # Print friendly done message
-echo "All right! Everything seems to be up and running. Enjoy :)"
+echo "All right! Everything seems to be installed correctly.\n
+It's truly suggested to reboot now your system to get everything up and running.\n
+Have a nice day!"
