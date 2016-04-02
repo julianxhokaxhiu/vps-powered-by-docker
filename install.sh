@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Configure Domains
+# Configuration variables
 RANCHER_DOMAIN="docker.lan"
 RANCHER_SERVER_NAME="rancher-server"
 RANCHER_AGENT_NAME="rancher-agent"
