@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Configure Domains
-local RANCHER_DOMAIN="docker.lan"
-local MAILSERVER_DOMAIN="mail.lan"
+RANCHER_DOMAIN="docker.lan"
+MAILSERVER_DOMAIN="mail.lan"
 
 # Install Docker
 yes '' | pacman -Sy --noprogressbar --noconfirm --needed docker openssl
