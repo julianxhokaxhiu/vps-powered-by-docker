@@ -16,9 +16,9 @@ mkdir -p /srv/certs
 
 # Create self-signed certificate for mail server
 openssl req \
-    -subj "/O=Mail Server/CN=$(MAILSERVER_DOMAIN)" \
-    -newkey rsa:2048 -nodes -keyout "/srv/certs/$(MAILSERVER_DOMAIN).key" \
-    -x509 -days 365 -out "/srv/certs/$(MAILSERVER_DOMAIN).crt"
+    -subj "/O=Mail Server/CN=$MAILSERVER_DOMAIN" \
+    -newkey rsa:2048 -nodes -keyout "/srv/certs/$MAILSERVER_DOMAIN.key" \
+    -x509 -days 365 -out "/srv/certs/$MAILSERVER_DOMAIN.crt"
 
 # Install Automatic Reverse proxy manager
 docker run \
@@ -37,7 +37,7 @@ docker run \
     --name=rancher-server \
     -d \
     -e "CATTLE_API_HOST=http://rancher-server:8080" \
-    -e "VIRTUAL_HOST=$(RANCHER_DOMAIN)" \
+    -e "VIRTUAL_HOST=$RANCHER_DOMAIN" \
     -e "VIRTUAL_PORT=8080" \
     rancher/server:v1.0.0
 
@@ -92,7 +92,7 @@ docker run \
     -p 995:995 \
     -v /etc/localtime:/etc/localtime:ro \
     -v /srv/mail:/data \
-    -e "VIRTUAL_HOST=$(MAILSERVER_DOMAIN)" \
+    -e "VIRTUAL_HOST=$MAILSERVER_DOMAIN" \
     -e "VIRTUAL_PROTO=https" \
     -e "VIRTUAL_PORT=443" \
     analogic/poste.io
