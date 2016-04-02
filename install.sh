@@ -53,8 +53,8 @@ docker run \
 
 # Wait until the rancher agent is up and running
 until [ "$(/usr/bin/docker inspect -f {{.State.Running}} rancher-agent)"=="true" ]; do
-    sleep 0.1;
-done;
+    sleep 0.1
+done
 
 # Push the rancher-server IP to the rancher-agent ( dirty patch until it's officially fixed )
 echo "[Unit]
@@ -99,8 +99,8 @@ docker run \
 
 # Wait until the mail server is up and running
 until [ "$(/usr/bin/docker inspect -f {{.State.Running}} rancher-agent)"=="true" ]; do
-    sleep 0.1;
-done;
+    sleep 0.1
+done
 
 # Print friendly done message
 echo "All right! Everything seems to be installed correctly.\n
