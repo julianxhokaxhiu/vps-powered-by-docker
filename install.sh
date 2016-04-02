@@ -98,7 +98,7 @@ docker run \
     analogic/poste.io
 
 # Wait until the mail server is up and running
-until [ "$(/usr/bin/docker inspect -f {{.State.Running}} rancher-agent)"=="true" ]; do
+until [ "$(/usr/bin/docker inspect -f {{.State.Running}} mail-server)"=="true" ]; do
     sleep 0.1
 done
 
