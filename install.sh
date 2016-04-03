@@ -27,6 +27,13 @@ openssl req \
     -newkey rsa:2048 -nodes -keyout "/srv/certs/$MAILSERVER_DOMAIN.key" \
     -x509 -days 365 -out "/srv/certs/$MAILSERVER_DOMAIN.crt" &>/dev/null
 
+# Create self-signed certificate for rancher server
+echo ">> Generating $RANCHER_DOMAIN self-signed certificate..."
+openssl req \
+    -subj "/O=Mail Server/CN=$RANCHER_DOMAIN" \
+    -newkey rsa:2048 -nodes -keyout "/srv/certs/$RANCHER_DOMAIN.key" \
+    -x509 -days 365 -out "/srv/certs/$RANCHER_DOMAIN.crt" &>/dev/null
+
 # Prepare the generic git projects container folder
 echo ">> Creating /srv/git folder..."
 mkdir -p /srv/git &>/dev/null
