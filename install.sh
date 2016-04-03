@@ -32,7 +32,7 @@ echo ">> Creating /srv/git folder..."
 mkdir -p /srv/git &>/dev/null
 
 # Clone the referrals spam protection
-echo ">> Cloning the referrals spam protection project into /srv/git/apache-nginx-referral-spam-blacklist"
+echo ">> Cloning the referrals spam protection project into /srv/git/apache-nginx-referral-spam-blacklist..."
 git clone https://github.com/Stevie-Ray/apache-nginx-referral-spam-blacklist.git /srv/git/apache-nginx-referral-spam-blacklist &>/dev/null
 
 # Prepare the generic template container folder
