@@ -2,10 +2,11 @@
 Arch Linux setup script to obtain a full VPS with Mail, Automatic Reverse Proxy and Rancher server without pain
 
 ## Stack
-- Git ( https://git-scm.com/ )
-- Docker ( https://www.docker.com/ )
-- Rancher 1.0 as Docker Server management ( http://rancher.com/ )
-- Poste as Mail Server ( https://poste.io )
+- [Git](https://git-scm.com/)
+- [Docker](https://www.docker.com/)
+- [Rancher 1.0](http://rancher.com/) as Docker Server management
+- [Poste](https://poste.io) as Mail Server
+- [jwilder/nginx-proxy](https://github.com/jwilder/nginx-proxy) as Reverse Proxy
 - [apache-nginx-referral-spam-blacklist](https://github.com/Stevie-Ray/apache-nginx-referral-spam-blacklist) preloaded for every host
 
 ## Usage
