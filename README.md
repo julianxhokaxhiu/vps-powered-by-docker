@@ -9,6 +9,9 @@ Arch Linux setup script to obtain a full VPS with Mail, Automatic Reverse Proxy 
 - [jwilder/nginx-proxy](https://github.com/jwilder/nginx-proxy) as Reverse Proxy
 - [apache-nginx-referral-spam-blacklist](https://github.com/Stevie-Ray/apache-nginx-referral-spam-blacklist) preloaded for every host
 
+## Requirements
+A clean Arch Linux install with SSH capability as root user ( or any user which has sudo powers ).
+
 ## Usage
 ```
 wget https://raw.githubusercontent.com/julianxhokaxhiu/vps-powered-by-docker/master/install.sh
