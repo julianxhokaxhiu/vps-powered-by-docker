@@ -43,6 +43,10 @@ mkdir -p /srv/tmpl &>/dev/null
 echo ">> Getting the nginx template for the reverse proxy which includes referrals spam protection..."
 wget -P /srv/tmpl/ https://raw.githubusercontent.com/julianxhokaxhiu/vps-powered-by-docker/master/nginx.tmpl &>/dev/null
 
+# Get the nginx proxy custom configuration
+echo ">> Getting the nginx custom proxy configuration..."
+wget -P /srv/tmpl/ https://raw.githubusercontent.com/julianxhokaxhiu/vps-powered-by-docker/master/proxy.conf &>/dev/null
+
 # Prepare the generic vhost container folder
 echo ">> Creating /srv/vhost folder..."
 mkdir -p /srv/vhost &>/dev/null
@@ -57,9 +61,10 @@ docker run \
     -p 443:443 \
     -v /srv/certs:/etc/nginx/certs \
     -v /srv/tmpl/nginx.tmpl:/app/nginx.tmpl:ro \
+    -v /srv/tmpl/proxy.conf:/etc/nginx/proxy.conf:ro \
     -v /srv/vhost/:/etc/nginx/vhost.d:ro \
-    -v /var/run/docker.sock:/tmp/docker.sock:ro \
     -v /srv/git/apache-nginx-referral-spam-blacklist/referral-spam.conf:/etc/nginx/referral-spam.conf:ro \
+    -v /var/run/docker.sock:/tmp/docker.sock:ro \
     jwilder/nginx-proxy &>/dev/null
 
 # Install Rancher Server
