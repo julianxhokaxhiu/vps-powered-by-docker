@@ -59,6 +59,7 @@ docker run \
     -v /srv/tmpl/nginx.tmpl:/app/nginx.tmpl:ro \
     -v /srv/vhost/:/etc/nginx/vhost.d:ro \
     -v /var/run/docker.sock:/tmp/docker.sock:ro \
+    -v /srv/git/apache-nginx-referral-spam-blacklist/referral-spam.conf:/etc/nginx/referral-spam.conf:ro \
     jwilder/nginx-proxy &>/dev/null
 
 # Install Rancher Server
