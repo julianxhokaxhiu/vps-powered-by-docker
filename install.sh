@@ -9,7 +9,7 @@ MAILSERVER_NAME="mail-server"
 
 # Install Docker
 echo ">> Installing required packages..."
-yes '' | pacman -Sy --noprogressbar --noconfirm --needed docker openssl &>/dev/null
+yes '' | pacman -Sy --noprogressbar --noconfirm --needed docker openssl git wget &>/dev/null
 
 # Enable and Start docker host service
 echo ">> Enabling docker service..."
@@ -27,6 +27,22 @@ openssl req \
     -newkey rsa:2048 -nodes -keyout "/srv/certs/$MAILSERVER_DOMAIN.key" \
     -x509 -days 365 -out "/srv/certs/$MAILSERVER_DOMAIN.crt" &>/dev/null
 
+# Prepare the generic git projects container folder
+echo ">> Creating /srv/git folder..."
+mkdir -p /srv/git &>/dev/null
+
+# Clone the referrals spam protection
+echo ">> Cloning the referrals spam protection project into /srv/git/apache-nginx-referral-spam-blacklist"
+git clone https://github.com/Stevie-Ray/apache-nginx-referral-spam-blacklist.git /srv/git/apache-nginx-referral-spam-blacklist &>/dev/null
+
+# Prepare the generic template container folder
+echo ">> Creating /srv/tmpl folder..."
+mkdir -p /srv/tmpl &>/dev/null
+
+# Get the new nginx template for the reverse proxy
+echo ">> Getting the nginx template for the reverse proxy which includes referrals spam protection..."
+wget -P /srv/tmpl/ https://raw.githubusercontent.com/julianxhokaxhiu/vps-powered-by-docker/master/nginx.tmpl &>/dev/null
+
 # Install Automatic Reverse proxy manager
 echo ">> Running Reverse Proxy docker..."
 docker run \
@@ -37,6 +53,7 @@ docker run \
     -p 443:443 \
     -v /srv/certs:/etc/nginx/certs \
     -v /var/run/docker.sock:/tmp/docker.sock:ro \
+    -v /srv/tmpl/nginx.tmpl:/app/nginx.tmpl:ro \
     jwilder/nginx-proxy &>/dev/null
 
 # Install Rancher Server
