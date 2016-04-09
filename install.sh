@@ -6,10 +6,11 @@ RANCHER_SERVER_NAME="rancher-server"
 RANCHER_AGENT_NAME="rancher-agent"
 MAILSERVER_DOMAIN="mail.lan"
 MAILSERVER_NAME="mail-server"
+LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Install Docker
 echo ">> Installing required packages..."
-yes '' | pacman -Sy --noprogressbar --noconfirm --needed docker openssl git wget &>/dev/null
+yes '' | pacman -Sy --noprogressbar --noconfirm --needed docker git wget &>/dev/null
 
 # Enable and Start docker host service
 echo ">> Enabling docker service..."
@@ -19,20 +20,6 @@ systemctl start docker.service &>/dev/null
 # Prepare the Automatic Reverse proxy manager certs folder
 echo ">> Creating /srv/certs folder..."
 mkdir -p /srv/certs &>/dev/null
-
-# Create self-signed certificate for mail server
-echo ">> Generating $MAILSERVER_DOMAIN self-signed certificate..."
-openssl req \
-    -subj "/O=Mail Server/CN=$MAILSERVER_DOMAIN" \
-    -newkey rsa:2048 -nodes -keyout "/srv/certs/$MAILSERVER_DOMAIN.key" \
-    -x509 -days 365 -out "/srv/certs/$MAILSERVER_DOMAIN.crt" &>/dev/null
-
-# Create self-signed certificate for rancher server
-echo ">> Generating $RANCHER_DOMAIN self-signed certificate..."
-openssl req \
-    -subj "/O=Mail Server/CN=$RANCHER_DOMAIN" \
-    -newkey rsa:2048 -nodes -keyout "/srv/certs/$RANCHER_DOMAIN.key" \
-    -x509 -days 365 -out "/srv/certs/$RANCHER_DOMAIN.crt" &>/dev/null
 
 # Prepare the generic git projects container folder
 echo ">> Creating /srv/git folder..."
@@ -66,13 +53,24 @@ docker run \
     -d \
     -p 80:80 \
     -p 443:443 \
-    -v /srv/certs:/etc/nginx/certs \
+    -v /usr/share/nginx/html \
+    -v /srv/certs:/etc/nginx/certs:ro \
     -v /srv/tmpl/nginx.tmpl:/app/nginx.tmpl:ro \
     -v /srv/tmpl/proxy.conf:/etc/nginx/proxy.conf:ro \
-    -v /srv/vhost/:/etc/nginx/vhost.d:ro \
+    -v /srv/vhost/:/etc/nginx/vhost.d \
     -v /srv/git/apache-nginx-referral-spam-blacklist/referral-spam.conf:/etc/nginx/referral-spam.conf:ro \
     -v /var/run/docker.sock:/tmp/docker.sock:ro \
     jwilder/nginx-proxy &>/dev/null
+
+# Install the Let's Encrypt Reverse Proxy companion
+echo ">> Running Let's Encrypt Reverse Proxy companion..."
+docker run \
+  -d \
+  --name=docker-auto-reverse-proxy-companion \
+  -v /srv/certs:/etc/nginx/certs:rw \
+  --volumes-from docker-auto-reverse-proxy \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  jrcs/letsencrypt-nginx-proxy-companion &>/dev/null
 
 # Install Rancher Server
 echo ">> Running Rancher Server..."
@@ -82,6 +80,8 @@ docker run \
     -d \
     -e "CATTLE_API_HOST=http://$RANCHER_SERVER_NAME:8080" \
     -e "VIRTUAL_HOST=$RANCHER_DOMAIN" \
+    -e "LETSENCRYPT_HOST=$RANCHER_DOMAIN" \
+    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -e "VIRTUAL_PORT=8080" \
     rancher/server:v1.0.0 &>/dev/null
 
@@ -145,6 +145,8 @@ docker run \
     -v /etc/localtime:/etc/localtime:ro \
     -v /srv/mail:/data \
     -e "VIRTUAL_HOST=$MAILSERVER_DOMAIN" \
+    -e "LETSENCRYPT_HOST=$MAILSERVER_DOMAIN" \
+    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -e "VIRTUAL_PROTO=https" \
     -e "VIRTUAL_PORT=443" \
     analogic/poste.io &>/dev/null
