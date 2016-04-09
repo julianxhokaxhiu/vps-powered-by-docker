@@ -65,8 +65,9 @@ docker run \
 # Install the Let's Encrypt Reverse Proxy companion
 echo ">> Running Let's Encrypt Reverse Proxy companion..."
 docker run \
-  -d \
+  --restart=always \
   --name=docker-auto-reverse-proxy-companion \
+  -d \
   -v /srv/certs:/etc/nginx/certs:rw \
   --volumes-from docker-auto-reverse-proxy \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
