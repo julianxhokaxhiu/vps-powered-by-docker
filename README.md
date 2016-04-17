@@ -2,6 +2,7 @@
 Arch Linux setup script to obtain a full VPS with Mail, Automatic Reverse Proxy and Rancher server without pain
 
 ## Stack
+- IPv4/IPv6 support ( Dual Stack )
 - [Git](https://git-scm.com/)
 - [Docker](https://www.docker.com/)
 - [Rancher](http://rancher.com/) as Docker Server management
