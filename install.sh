@@ -84,7 +84,7 @@ docker run \
     -e "LETSENCRYPT_HOST=$RANCHER_DOMAIN" \
     -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -e "VIRTUAL_PORT=8080" \
-    rancher/server:v1.0.0 &>/dev/null
+    rancher/server:v1.0.1 &>/dev/null
 
 # Register Rancher Agent
 echo ">> Running Rancher Agent..."
@@ -95,7 +95,7 @@ docker run \
     -d \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v /var/lib/rancher:/var/lib/rancher \
-    rancher/agent:v0.11.0 "http://$RANCHER_SERVER_NAME:8080/v1" &>/dev/null
+    rancher/agent:v1.0.1 "http://$RANCHER_SERVER_NAME:8080/v1" &>/dev/null
 
 # Wait until the rancher agent is up and running
 echo -n ">> Waiting for Rancher Agent to start..."
