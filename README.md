@@ -5,7 +5,6 @@ Arch Linux setup script to obtain a full VPS with Mail, Automatic Reverse Proxy 
 - IPv4/IPv6 support ( Dual Stack )
 - [Git](https://git-scm.com/)
 - [Docker](https://www.docker.com/)
-- [Rancher](http://rancher.com/) as Docker Server management
 - [Poste](https://poste.io) as Mail Server
 - [jwilder/nginx-proxy](https://github.com/jwilder/nginx-proxy) as Reverse Proxy
 - [jrcs/letsencrypt-nginx-proxy-companion](https://hub.docker.com/r/jrcs/letsencrypt-nginx-proxy-companion/) as automatic Let's Encrypt provisioner ( official companion docker for jwilder/nginx-proxy )
@@ -27,7 +26,6 @@ chmod +x install.sh
 ```
 
 ## Links
-- http://docker.lan/ for the Rancher Server
 - https://mail.lan/admin/login for the Mail Server Admin panel
 - http://mail.lan/ or https://mail.lan/ for the Email access
 
