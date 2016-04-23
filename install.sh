@@ -1,9 +1,6 @@
 #!/bin/bash
 
 # Configuration variables
-RANCHER_DOMAIN="docker.lan"
-RANCHER_SERVER_NAME="rancher-server"
-RANCHER_AGENT_NAME="rancher-agent"
 MAILSERVER_DOMAIN="mail.lan"
 MAILSERVER_NAME="mail-server"
 LETSENCRYPT_EMAIL="foo@bar.mail"
@@ -72,57 +69,6 @@ docker run \
   --volumes-from docker-auto-reverse-proxy \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   jrcs/letsencrypt-nginx-proxy-companion &>/dev/null
-
-# Install Rancher Server
-echo ">> Running Rancher Server..."
-docker run \
-    --restart=always \
-    --name="$RANCHER_SERVER_NAME" \
-    -d \
-    -e "CATTLE_API_HOST=http://$RANCHER_SERVER_NAME:8080" \
-    -e "VIRTUAL_HOST=$RANCHER_DOMAIN" \
-    -e "LETSENCRYPT_HOST=$RANCHER_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
-    -e "VIRTUAL_PORT=8080" \
-    rancher/server:v1.0.1 &>/dev/null
-
-# Register Rancher Agent
-echo ">> Running Rancher Agent..."
-docker run \
-    --name="register-$RANCHER_AGENT_NAME" \
-    --link=$RANCHER_SERVER_NAME \
-    --privileged \
-    -d \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v /var/lib/rancher:/var/lib/rancher \
-    rancher/agent:v1.0.1 "http://$RANCHER_SERVER_NAME:8080/v1" &>/dev/null
-
-# Wait until the rancher agent is up and running
-echo -n ">> Waiting for Rancher Agent to start..."
-while [ ! $(docker top $RANCHER_AGENT_NAME &>/dev/null && echo $?) ]
-do
-    echo -n "."
-    sleep 0.5
-done
-echo "started!"
-
-# Push the rancher-server IP to the rancher-agent ( dirty patch until it's officially fixed )
-echo ">> Creating the Unit to link Rancher Agent to Rancher Server locally..."
-echo "[Unit]
-Description=Patch Ranger Agent Hosts with Rancher Server IP ( dirty way to link them )
-After=docker.service
-Requires=docker.service
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/bash -c \"/usr/bin/echo \\\"\$(/usr/bin/docker inspect --format '{{ .NetworkSettings.IPAddress }}' $RANCHER_SERVER_NAME) $RANCHER_SERVER_NAME\\\" >> /var/lib/docker/containers/\$(/usr/bin/docker inspect --format '{{ .Id }}' $RANCHER_AGENT_NAME)/hosts\"
-
-[Install]
-WantedBy=multi-user.target" > /etc/systemd/system/patch-rancher-agent-hosts.service
-# Do it on every reboot
-systemctl enable patch-rancher-agent-hosts.service &>/dev/null
-# And do it now please :)
-systemctl start patch-rancher-agent-hosts.service &>/dev/null
 
 # Prepare the Mail Server data folder
 echo ">> Creating /srv/mail folder..."
