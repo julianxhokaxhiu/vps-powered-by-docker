@@ -16,7 +16,7 @@ Arch Linux setup script to obtain a full VPS with Automatic Reverse Proxy withou
 A clean Arch Linux install with SSH capability as root user ( or any user which has sudo powers ).
 
 ## Installation
-```
+```bash
 wget https://raw.githubusercontent.com/julianxhokaxhiu/vps-powered-by-docker/master/install.sh
 chmod -r +x *.sh
 ./install.sh
@@ -24,8 +24,9 @@ chmod -r +x *.sh
 
 ## Module setup
 Edit the configuration variables to fit your needs, inside every module, then
-```
-./modules/<module_name>.sh # example ./modules/mail_server.sh
+```bash
+./modules/<module_name>.sh
+# example ./modules/mail_server.sh
 ```
 
 ## Disclaimer
