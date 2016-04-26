@@ -17,8 +17,9 @@ A clean Arch Linux install with SSH capability as root user ( or any user which 
 
 ## Installation
 ```bash
-wget https://raw.githubusercontent.com/julianxhokaxhiu/vps-powered-by-docker/master/install.sh
-chmod -r +x *.sh
+wget https://github.com/julianxhokaxhiu/vps-powered-by-docker/archive/master.zip
+unzip master.zip && cd vps-powered-by-docker-master
+find ./ -name "*.sh" -exec chmod +x {} \;
 ./install.sh
 ```
 
