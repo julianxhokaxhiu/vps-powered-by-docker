@@ -23,7 +23,7 @@ chmod -r +x *.sh
 ```
 
 ## Module setup
-Edit the configuration variables, inside every module, to fit your needs, then
+Edit the configuration variables to fit your needs, inside every module, then
 ```
 ./modules/<module_name>.sh # example ./modules/mail_server.sh
 ```
