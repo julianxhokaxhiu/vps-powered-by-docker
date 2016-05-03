@@ -33,7 +33,7 @@ docker run \
     -e "VIRTUAL_PORT=443" \
     analogic/poste.io &>/dev/null
 
-# Wait until the mail server is up and running
+# Wait until the docker is up and running
 echo -n ">> Waiting for Mail server to start..."
 while [ ! $(docker top $MAILSERVER_NAME &>/dev/null && echo $?) ]
 do
