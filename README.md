@@ -11,6 +11,7 @@ Arch Linux setup script to obtain a full VPS with Automatic Reverse Proxy withou
 
 ## Modules
 - [Poste](https://poste.io) ( [mail_server.sh](modules/mail_server.sh) )
+- [UI for Docker](https://github.com/kevana/ui-for-docker) ( [ui_for_docker.sh](modules/ui_for_docker.sh) )
 
 ## Requirements
 A clean Arch Linux install with SSH capability as root user ( or any user which has sudo powers ).
