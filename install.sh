@@ -65,6 +65,15 @@ docker run \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   jrcs/letsencrypt-nginx-proxy-companion &>/dev/null
 
+# Autoupdate Dockers from time to time and cleanup old images
+echo ">> Running Docker Auto-Update manager..."
+docker run
+  --restart=always \
+  --name=docker-autoupdate \
+  -d \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  centurylink/watchtower --cleanup &>/dev/null
+
 # Print friendly done message
 echo "-----------------------------------------------------"
 echo "All right! Everything seems to be installed correctly. It's truly suggested to reboot now your system to get everything up and running."
