@@ -67,7 +67,7 @@ docker run \
 
 # Autoupdate Dockers from time to time and cleanup old images
 echo ">> Running Docker Auto-Update manager..."
-docker run
+docker run \
   --restart=always \
   --name=docker-autoupdate \
   -d \
