@@ -74,7 +74,7 @@ docker start $MAILSERVER_NAME
 
 # Print friendly done message
 echo "-----------------------------------------------------"
-echo "All right! Everything seems to be installed correctly. Have a nice day!"
+echo "All right! Everything seems to be installed correctly. Have a ... https://open.spotify.com/track/7o8tJ3dcDK9KXP9x45wTp1"
 echo ">> Admin URL: https://${MAILSERVER_DOMAIN}/admin/login"
 echo ">> User URL: https://${MAILSERVER_DOMAIN}/"
 echo "-----------------------------------------------------"
