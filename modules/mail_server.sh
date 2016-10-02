@@ -42,6 +42,36 @@ do
 done
 echo "started!"
 
+# Let's wait until Let's Encrypt SSL certificates are created
+echo -n ">> Waiting for Let's Encrypt Certificates Public Key to be generated..."
+while [ ! -f /srv/certs/$MAILSERVER_DOMAIN/fullchain.pem ]
+do
+    echo -n "."
+    sleep 0.5
+done
+echo "created!"
+
+echo -n ">> Waiting for Let's Encrypt Certificates Private Key to be generated..."
+while [ ! -f /srv/certs/$MAILSERVER_DOMAIN/key.pem ]
+do
+    echo -n "."
+    sleep 0.5
+done
+echo "created!"
+
+# Hard Link them to the relative SSL directory, in order to use them internally also for SMTP, IMAP and POP3
+echo -n ">> Linking Let's Encrypt Certificates to the newly created $MAILSERVER_NAME docker..."
+ln /srv/certs/$MAILSERVER_DOMAIN/fullchain.pem /srv/mail/ssl/server.crt
+ln /srv/certs/$MAILSERVER_DOMAIN/key.pem /srv/mail/ssl/server.key
+
+# Create an empty CA cert so poste.io can detect our SSL certificate
+touch /srv/mail/ssl/ca.crt
+
+# Finally restart poste.io Docker in order to use these SSL certificate from now on
+echo -n ">> Restarting $MAILSERVER_NAME Docker..."
+docker stop $MAILSERVER_NAME
+docker start $MAILSERVER_NAME
+
 # Print friendly done message
 echo "-----------------------------------------------------"
 echo "All right! Everything seems to be installed correctly. Have a nice day!"
