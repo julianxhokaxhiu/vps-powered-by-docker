@@ -6,12 +6,17 @@ RAINLOOP_NAME="rainloop-mail-client"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 MAILSERVER_NAME="mail-server"
 
+# Prepare the Rainloop Mail Client data folder
+echo ">> Creating /srv/data/$RAINLOOP_DOMAIN folder..."
+mkdir -p "/srv/data/$RAINLOOP_DOMAIN" &>/dev/null
+
 # Install Rainloop client
 echo ">> Running Rainloop Mail Client..."
 docker run \
     -d \
     --name="$RAINLOOP_NAME" \
     --restart=always \
+    -v "/srv/data/$RAINLOOP_DOMAIN:/var/www/html/data" \
     --link="$MAILSERVER_NAME:mail-server" \
     -e "VIRTUAL_HOST=$RAINLOOP_DOMAIN" \
     -e "LETSENCRYPT_HOST=$RAINLOOP_DOMAIN" \
