@@ -7,7 +7,7 @@ Arch Linux setup script to obtain a full VPS with Automatic Reverse Proxy withou
 - [Docker](https://www.docker.com/)
 - [CenturyLinkLabs/watchtower](https://github.com/CenturyLinkLabs/watchtower) as the Docker auto-update manager
 - [jwilder/nginx-proxy](https://github.com/jwilder/nginx-proxy) as Reverse Proxy
-- [jrcs/letsencrypt-nginx-proxy-companion](https://hub.docker.com/r/jrcs/letsencrypt-nginx-proxy-companion/) as automatic Let's Encrypt provisioner ( official companion docker for jwilder/nginx-proxy )
+- [alastaircoote/letsencrypt-nginx-proxy-companion](https://hub.docker.com/r/alastaircoote/letsencrypt-nginx-proxy-companion/) as automatic Let's Encrypt provisioner ( official companion docker for jwilder/nginx-proxy )
 - [apache-nginx-referral-spam-blacklist](https://github.com/Stevie-Ray/apache-nginx-referral-spam-blacklist) preloaded for every host
 
 ## Modules
