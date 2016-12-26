@@ -63,7 +63,7 @@ docker run \
   -v /srv/certs:/etc/nginx/certs:rw \
   --volumes-from docker-auto-reverse-proxy \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  alastaircoote/letsencrypt-nginx-proxy-companion &>/dev/null
+  alastaircoote/docker-letsencrypt-nginx-proxy-companion &>/dev/null
 
 # Autoupdate Dockers from time to time and cleanup old images
 echo ">> Running Docker Auto-Update manager..."
