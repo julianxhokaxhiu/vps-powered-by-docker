@@ -27,11 +27,11 @@ mkdir -p /srv/tmpl &>/dev/null
 
 # Get the new nginx template for the reverse proxy
 echo ">> Getting the nginx template for the reverse proxy which includes referrals spam protection..."
-wget -P /srv/tmpl/ https://raw.githubusercontent.com/julianxhokaxhiu/vps-powered-by-docker/master/nginx.tmpl &>/dev/null
+wget -q https://raw.githubusercontent.com/julianxhokaxhiu/vps-powered-by-docker/master/nginx.tmpl -O /srv/tmpl/nginx.tmpl &>/dev/null
 
 # Get the nginx proxy custom configuration
 echo ">> Getting the nginx custom proxy configuration..."
-wget -P /srv/tmpl/ https://raw.githubusercontent.com/julianxhokaxhiu/vps-powered-by-docker/master/proxy.conf &>/dev/null
+wget -q https://raw.githubusercontent.com/julianxhokaxhiu/vps-powered-by-docker/master/proxy.conf -O /srv/tmpl/proxy.conf &>/dev/null
 
 # Prepare the generic vhost container folder
 echo ">> Creating /srv/vhost folder..."
