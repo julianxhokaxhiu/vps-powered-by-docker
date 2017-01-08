@@ -15,6 +15,7 @@ Arch Linux setup script to obtain a full VPS with Automatic Reverse Proxy withou
 - [UI for Docker](https://github.com/kevana/ui-for-docker) ( [ui_for_docker.sh](modules/ui_for_docker.sh) )
 - [Rainloop](http://www.rainloop.net/) ( [rainloop.sh](modules/rainloop.sh) )
 - [Winds](http://winds.getstream.io/) ( [getstream_winds.sh](modules/getstream_winds.sh) )
+- [Lineage](http://lineageos.org/) [CI/CD](https://github.com/julianxhokaxhiu/docker-lineage-cicd) + [OTA](https://github.com/julianxhokaxhiu/LineageOTA) ( [lineage_cicd_ota.sh](modules/lineage_cicd_ota.sh) )
 
 ## Requirements
 A clean Arch Linux install with SSH capability as root user ( or any user which has sudo powers ).
