@@ -45,8 +45,9 @@ echo "started!"
 # Install Lineage CICD container
 echo ">> Running Lineage CICD..."
 docker run \
-    --restart=always \
     -d \
+    --name="$LINCICD_NAME" \
+    --restart=always \
     -e "USER_NAME=$USER_NAME" \
     -e "USER_MAIL=$USER_MAIL" \
     -e "DEVICE_LIST=$DEVICE_LIST" \
