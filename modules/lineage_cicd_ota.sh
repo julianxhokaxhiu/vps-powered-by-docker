@@ -64,7 +64,7 @@ docker run \
     -v "/srv/data/$LINCICD_NAME/ccache:/srv/ccache" \
     -v "/srv/data/$LINCICD_NAME/src:/srv/src" \
     -v "/srv/data/$LINCICD_NAME/local_manifests:/srv/local_manifests" \
-    -v "/srv/data/$LINOTA_NAME:/srv/out" \
+    -v "/srv/data/$LINOTA_NAME:/srv/zips" \
     julianxhokaxhiu/docker-lineage-cicd &>/dev/null
 
 # Print friendly done message
