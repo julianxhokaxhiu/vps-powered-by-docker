@@ -11,6 +11,9 @@ DEVICE_LIST="hammerhead" # See https://github.com/julianxhokaxhiu/docker-lineage
 BRANCH_NAME="cm-14.1" # See https://github.com/LineageOS/android_vendor_cm/branches
 OTA_URL="https://$LINOTA_DOMAIN/api" # See https://blog.julianxhokaxhiu.com/how-the-cm-ota-server-works-and-how-to-implement-and-use-ours/
 CRONTAB_TIME="0 10 * * *" # To make it easy, use https://crontab.guru/
+DEBUG=false # Set to true for more verbose logging
+CLEAN_AFTER_BUILD=true # Set to false to never clean the output folder of the build
+WITH_SU=true # Set to false if you don't want root capabilities built-in inside the ROM
 
 # Prepare the Lineage OTA data folder
 echo ">> Creating /srv/data/$LINOTA_NAME folder..."
@@ -20,6 +23,7 @@ mkdir -p "/srv/data/$LINOTA_NAME" &>/dev/null
 echo ">> Creating /srv/data/$LINCICD_NAME folder..."
 mkdir -p "/srv/data/$LINCICD_NAME/ccache" &>/dev/null
 mkdir -p "/srv/data/$LINCICD_NAME/src" &>/dev/null
+mkdir -p "/srv/data/$LINCICD_NAME/local_manifests" &>/dev/null
 
 # Install Lineage OTA server
 echo ">> Running Lineage OTA Server..."
@@ -54,8 +58,12 @@ docker run \
     -e "BRANCH_NAME=$BRANCH_NAME" \
     -e "OTA_URL=$OTA_URL" \
     -e "CRONTAB_TIME=$CRONTAB_TIME" \
+    -e "DEBUG=$DEBUG" \
+    -e "CLEAN_AFTER_BUILD=$CLEAN_AFTER_BUILD" \
+    -e "WITH_SU=$WITH_SU" \
     -v "/srv/data/$LINCICD_NAME/ccache:/srv/ccache" \
     -v "/srv/data/$LINCICD_NAME/src:/srv/src" \
+    -v "/srv/data/$LINCICD_NAME/local_manifests:/srv/local_manifests" \
     -v "/srv/data/$LINOTA_NAME:/srv/out" \
     julianxhokaxhiu/docker-lineage-cicd &>/dev/null
 
