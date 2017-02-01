@@ -13,7 +13,7 @@ mkdir -p "/srv/data/$DNSSERVER_DOMAIN" &>/dev/null
 
 # Enable IPv6 support in Docker
 echo ">> Enabling IPv6 support in your Docker service..."
-if ! [ -f "/etc/docker/daemon.json"]; then
+if ! [ -f "/etc/docker/daemon.json" ]; then
   echo "{\"ipv6\": true,\"fixed-cidr-v6\": \"fd00:dead:beef::/48\"}" > /etc/docker/daemon.json
 else
   echo -e "\nIMPORTANT! ADD THIS MANUALLY TO YOUR '/etc/docker/daemon.json' FILE:\n\n{\"ipv6\": true,\"fixed-cidr-v6\": \"fd00:dead:beef::/48\"}\n\nTO ENABLE IPV6 SUPPORT IN DOCKER!\n"
@@ -29,7 +29,7 @@ docker run \
     --net=host \
     -v /lib/modules:/lib/modules:ro \
     -v /var/run/docker.sock:/var/run/docker.sock:ro \
-    robbertkl/ipv6nat
+    robbertkl/ipv6nat &>/dev/null
 
 # Install DNS Server
 echo ">> Running DNS Server..."
