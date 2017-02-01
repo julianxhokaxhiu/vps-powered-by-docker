@@ -11,6 +11,26 @@ API_KEY=""
 echo ">> Creating /srv/data/$DNSSERVER_DOMAIN folder..."
 mkdir -p "/srv/data/$DNSSERVER_DOMAIN" &>/dev/null
 
+# Enable IPv6 support in Docker
+echo ">> Enabling IPv6 support in your Docker service..."
+if ! [ -f "/etc/docker/daemon.json"]; then
+  echo "{\"ipv6\": true,\"fixed-cidr-v6\": \"fd00:dead:beef::/48\"}" > /etc/docker/daemon.json
+else
+  echo -e "\nIMPORTANT! ADD THIS MANUALLY TO YOUR '/etc/docker/daemon.json' FILE:\n\n{\"ipv6\": true,\"fixed-cidr-v6\": \"fd00:dead:beef::/48\"}\n\nTO ENABLE IPV6 SUPPORT IN DOCKER!\n"
+fi
+
+# Provide IPv6 NAT feature
+echo ">> Enabling IPv6 NAT..."
+docker run \
+    -d \
+    --name="ipv6nat" \
+    --restart=always \
+    --privileged \
+    --net=host \
+    -v /lib/modules:/lib/modules:ro \
+    -v /var/run/docker.sock:/var/run/docker.sock:ro \
+    robbertkl/ipv6nat
+
 # Install DNS Server
 echo ">> Running DNS Server..."
 docker run \
@@ -39,7 +59,7 @@ echo "started!"
 
 # Print friendly done message
 echo "-----------------------------------------------------"
-echo "All right! Everything seems to be installed correctly. Have a nice day!"
+echo "All right! Everything seems to be installed correctly. Remember to restart the Docker service to have everything working properly. Have a nice day!"
 echo ">> URL: https://${DNSSERVER_DOMAIN}/"
 echo ">> DNS: TCP/UDP on Port 53"
 echo "-----------------------------------------------------"
