@@ -13,6 +13,7 @@ Arch Linux setup script to obtain a full VPS with Automatic Reverse Proxy withou
 ## Modules
 - [Poste](https://poste.io) ( [mail_server.sh](modules/mail_server.sh) )
 - [UI for Docker](https://github.com/kevana/ui-for-docker) ( [ui_for_docker.sh](modules/ui_for_docker.sh) )
+- [Portainer](https://github.com/portainer/portainer) ( [portainer.sh](modules/portainer.sh) )
 - [Rainloop](http://www.rainloop.net/) ( [rainloop.sh](modules/rainloop.sh) )
 - [Winds](http://winds.getstream.io/) ( [getstream_winds.sh](modules/getstream_winds.sh) )
 - [Lineage](http://lineageos.org/) [CI/CD](https://github.com/julianxhokaxhiu/docker-lineage-cicd) + [OTA](https://github.com/julianxhokaxhiu/LineageOTA) ( [lineage_cicd_ota.sh](modules/lineage_cicd_ota.sh) )
