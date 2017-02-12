@@ -21,6 +21,11 @@ else
   echo -e "\nIMPORTANT! ADD THIS MANUALLY TO YOUR '/etc/docker/daemon.json' FILE:\n\n{\"ipv6\": true,\"fixed-cidr-v6\": \"fd00:dead:beef::/48\"}\n\nTO ENABLE IPV6 SUPPORT IN DOCKER!\n"
 fi
 
+# Set IPv6 SLAAC to HWADDR in order to get always the same IPv6 address
+echo ">> Setting IPv6 SLAAC to HWADDR modus..."
+sed -i 's/slaac private/slaac hwaddr/g' /etc/dhcpcd.conf
+systemctl restart dhcpcd.service
+
 # Provide IPv6 NAT feature
 echo ">> Enabling IPv6 NAT..."
 docker run \
