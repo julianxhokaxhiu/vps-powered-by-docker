@@ -87,7 +87,9 @@ server {
 }
 {{ end }}
 
-{{ range $host, $containers := groupByMulti $ "Env.VIRTUAL_HOST" "," }}
+{{ range $hostfull, $containers := groupByMulti $ "Env.VIRTUAL_HOST" "," }}
+{{ $host := first ( split $hostfull ":" ) }}
+{{ $port := last ( split $hostfull ":" ) }}
 
 upstream {{ $host }} {
 {{ range $container := $containers }}
