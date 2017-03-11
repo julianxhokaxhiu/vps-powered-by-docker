@@ -52,7 +52,7 @@ docker run \
     -v /srv/vhost/:/etc/nginx/vhost.d \
     -v /srv/git/apache-nginx-referral-spam-blacklist/referral-spam.conf:/etc/nginx/referral-spam.conf:ro \
     -v /var/run/docker.sock:/tmp/docker.sock:ro \
-    jwilder/nginx-proxy &>/dev/null
+    jwilder/nginx-proxy:alpine &>/dev/null
 
 # Install the Let's Encrypt Reverse Proxy companion
 echo ">> Running Let's Encrypt Reverse Proxy companion..."
@@ -63,7 +63,7 @@ docker run \
   -v /srv/certs:/etc/nginx/certs:rw \
   --volumes-from docker-auto-reverse-proxy \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  alastaircoote/docker-letsencrypt-nginx-proxy-companion &>/dev/null
+  jrcs/letsencrypt-nginx-proxy-companion &>/dev/null
 
 # Autoupdate Dockers from time to time and cleanup old images
 echo ">> Running Docker Auto-Update manager..."
