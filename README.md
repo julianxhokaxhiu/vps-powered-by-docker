@@ -37,5 +37,8 @@ Edit the configuration variables to fit your needs, inside every module, then
 # example ./modules/mail_server.sh
 ```
 
+## Performance monitoring
+Take a look at your Docker status thanks to this awesome CLI tool called [ctop](https://github.com/bcicen/ctop).
+
 ## Disclaimer
 - The mapping of the domains to the Host IP is considered done already externally to this project ( through DNS Server or statically inside your `hosts` file )
