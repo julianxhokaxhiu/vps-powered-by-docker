@@ -40,7 +40,6 @@ docker run \
     --name="$KOEL_DOMAIN" \
     --link="$KOEL_DOMAIN-db:db" \
     -e "VIRTUAL_HOST=$KOEL_DOMAIN" \
-    -e "VIRTUAL_PORT=9876" \
     -e "LETSENCRYPT_HOST=$KOEL_DOMAIN" \
     -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -e "DB_HOST=db" \
