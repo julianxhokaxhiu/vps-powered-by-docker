@@ -7,8 +7,8 @@ LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the ampache data folders
 echo ">> Creating /srv/data/$AMPACHE_DOMAIN folders..."
-mkdir -p "/srv/data/$AMPACHE_DOMAIN/config" &>/dev/null
-mkdir -p "/srv/data/$AMPACHE_DOMAIN/themes" &>/dev/null
+mkdir -p "/srv/http/$AMPACHE_DOMAIN/config" &>/dev/null
+mkdir -p "/srv/http/$AMPACHE_DOMAIN/themes" &>/dev/null
 mkdir -p "/srv/dbs/$AMPACHE_DOMAIN" &>/dev/null
 
 # Run the database docker.
@@ -40,8 +40,8 @@ docker run \
     -e "LETSENCRYPT_HOST=$AMPACHE_DOMAIN" \
     -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -v "/PATH/TO/MUSIC/ON/THE/HOST:/var/data:ro" \
-    -v "/srv/data/$AMPACHE_DOMAIN/config:/var/www/html/config" \
-    -v "/srv/data/$AMPACHE_DOMAIN/themes:/var/www/html/themes" \
+    -v "/srv/http/$AMPACHE_DOMAIN/config:/var/www/html/config" \
+    -v "/srv/http/$AMPACHE_DOMAIN/themes:/var/www/html/themes" \
     plusminus/ampache &>/dev/null
 
 # Wait until the docker is up and running
