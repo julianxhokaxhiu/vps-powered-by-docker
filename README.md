@@ -21,6 +21,7 @@ Arch Linux setup script to obtain a full VPS with Automatic Reverse Proxy withou
 - [ownCloud](https://owncloud.org/) ( [owncloud.sh](modules/owncloud.sh) )
 - [koel](https://koel.phanan.net/) ( [koel.sh](modules/koel.sh) )
 - [ampache](http://ampache.org/) ( [ampache.sh](modules/ampache.sh) )
+- [goaccess](https://goaccess.io/) ( [goaccess.sh](modules/goaccess.sh) )
 
 ## Requirements
 A clean Arch Linux install with SSH capability as root user ( or any user which has sudo powers ).
