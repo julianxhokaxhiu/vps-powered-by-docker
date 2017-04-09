@@ -23,6 +23,7 @@ Arch Linux setup script to obtain a full VPS with Automatic Reverse Proxy withou
 - [koel](https://koel.phanan.net/) ( [koel.sh](modules/koel.sh) )
 - [ampache](http://ampache.org/) ( [ampache.sh](modules/ampache.sh) )
 - [goaccess](https://goaccess.io/) ( [goaccess.sh](modules/goaccess.sh) )
+- [WebDAV](https://hub.docker.com/r/idelsink/webdav/) ( [webdav.sh](modules/webdav.sh) )
 
 ## Requirements
 A clean Arch Linux install with SSH capability as root user ( or any user which has sudo powers ).
