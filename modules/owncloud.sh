@@ -17,7 +17,6 @@ docker run \
     -d \
     --name="$OWNCLOUD_NAME" \
     --restart=always \
-    -v /var/run/docker.sock:/var/run/docker.sock \
     -e "VIRTUAL_HOST=$OWNCLOUD_DOMAIN" \
     -e "LETSENCRYPT_HOST=$OWNCLOUD_DOMAIN" \
     -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
