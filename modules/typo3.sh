@@ -43,7 +43,7 @@ docker run \
     -e "LETSENCRYPT_HOST=$TYPO3_DOMAIN" \
     -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -v "/srv/http/$TYPO3_DOMAIN:/app" \
-    "webdevops/php-apache:alpine-php7" &>/dev/null
+    "webdevops/php-apache:debian-8-php7" &>/dev/null
 
 # Wait until the docker is up and running
 echo -n ">> Waiting for TYPO3 to start..."
