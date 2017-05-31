@@ -25,6 +25,7 @@ Arch Linux setup script to obtain a full VPS with Automatic Reverse Proxy withou
 - [goaccess](https://goaccess.io/) ( [goaccess.sh](modules/goaccess.sh) )
 - [gogs](https://gogs.io/) ( [gogs.sh](modules/gogs.sh) )
 - [WebDAV](https://hub.docker.com/r/idelsink/webdav/) ( [webdav.sh](modules/webdav.sh) )
+- [Typo3](https://typo3.org/) ( [typo3.sh](modules/typo3.sh) )
 
 ## Requirements
 A clean Arch Linux install with SSH capability as root user ( or any user which has sudo powers ).
