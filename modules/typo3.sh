@@ -22,7 +22,7 @@ echo ">> Creating Database docker ( only if it doesn't already exist )..."
 docker run \
     -d \
     --restart=always \
-    --name="$TYPO3_DOMAIN-db" \
+    --name="$TYPO3_NAME-db" \
     -e "MYSQL_DATABASE=$MYSQL_DATABASE" \
     -e "MYSQL_USER=$MYSQL_USER" \
     -e "MYSQL_PASSWORD=$MYSQL_PASSWORD" \
@@ -38,7 +38,7 @@ docker run \
     -d \
     --name="$TYPO3_NAME" \
     --restart=always \
-    --link="$TYPO3_DOMAIN-db:db" \
+    --link="$TYPO3_NAME-db:db" \
     -e "VIRTUAL_HOST=$TYPO3_DOMAIN" \
     -e "LETSENCRYPT_HOST=$TYPO3_DOMAIN" \
     -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
