@@ -72,7 +72,7 @@ docker run \
   --name=docker-autoupdate \
   -d \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  centurylink/watchtower --cleanup &>/dev/null
+  v2tec/watchtower --cleanup &>/dev/null
 
 # Print friendly done message
 echo "-----------------------------------------------------"
