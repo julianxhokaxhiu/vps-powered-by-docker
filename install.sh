@@ -37,11 +37,18 @@ wget -q https://raw.githubusercontent.com/julianxhokaxhiu/vps-powered-by-docker/
 echo ">> Creating /srv/vhost folder..."
 mkdir -p /srv/vhost &>/dev/null
 
+# Create a custom network, in order to enable discovery without --link usage
+echo ">> Creating a custom 'vps-powered-by-docker' docker network..."
+docker network create \
+    -d bridge \
+    "vps-powered-by-docker" &>/dev/null
+
 # Install Automatic Reverse proxy manager
 echo ">> Running Reverse Proxy docker..."
 docker run \
     --restart=always \
     --name=docker-auto-reverse-proxy \
+    --network="vps-powered-by-docker" \
     -d \
     -p 80:80 \
     -p 443:443 \
@@ -59,6 +66,7 @@ echo ">> Running Let's Encrypt Reverse Proxy companion..."
 docker run \
   --restart=always \
   --name=docker-auto-reverse-proxy-companion \
+  --network="vps-powered-by-docker" \
   -d \
   -v /srv/certs:/etc/nginx/certs:rw \
   --volumes-from docker-auto-reverse-proxy \
@@ -70,6 +78,7 @@ echo ">> Running Docker Auto-Update manager..."
 docker run \
   --restart=always \
   --name=docker-autoupdate \
+  --network="vps-powered-by-docker" \
   -d \
   -v /var/run/docker.sock:/var/run/docker.sock \
   v2tec/watchtower --cleanup &>/dev/null
