@@ -21,7 +21,6 @@ docker run \
     --restart=always \
     --name="$GOGS_NAME" \
     -d \
-    --network="vps-powered-by-docker" \
     --network-alias="$GOGS_DOMAIN" \
     -p "$GOGS_SSHPORT:22" \
     -e "VIRTUAL_HOST=$GOGS_DOMAIN" \
@@ -43,7 +42,6 @@ if [ $GOGS_WITHCICD == true ]; then
     --restart=always \
     --name="$DRONE_SERVER_NAME" \
     -d \
-    --network="vps-powered-by-docker" \
     --network-alias="$DRONE_DOMAIN" \
     -e "DRONE_SERVER_ADDR=0.0.0.0:80" \
     -e "DRONE_OPEN=true" \
@@ -75,7 +73,6 @@ if [ $GOGS_WITHCICD == true ]; then
   docker run \
     --restart=always \
     --name="$DRONE_AGENT_NAME" \
-    --network="vps-powered-by-docker" \
     -d \
     -e "DRONE_SERVER=${DRONE_DOMAIN}:9000" \
     -e "DRONE_SECRET=${DRONE_SECRET}" \
