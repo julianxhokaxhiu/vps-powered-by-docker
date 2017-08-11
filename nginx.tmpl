@@ -108,8 +108,7 @@ server {
 {{ end }}
 
 {{ range $hostfull, $containers := groupByMulti $ "Env.VIRTUAL_HOST" "," }}
-{{ $host := first ( split $hostfull ":" ) }}
-{{ $host := trim $host }}
+{{ $host := trim ( first ( split $hostfull ":" ) ) }}
 {{ $is_regexp := hasPrefix "~" $host }}
 {{ $upstream_name := when $is_regexp (sha1 $host) $host }}
 {{ $port := last ( split $hostfull ":" ) }}
