@@ -52,6 +52,7 @@ docker run \
     -d \
     -p 80:80 \
     -p 443:443 \
+    -e "ENABLE_IPV6=true" \
     -v /usr/share/nginx/html \
     -v /srv/certs:/etc/nginx/certs:ro \
     -v /srv/tmpl/nginx.tmpl:/app/nginx.tmpl:ro \
