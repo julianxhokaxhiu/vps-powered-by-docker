@@ -17,6 +17,14 @@
   {{ end }}
 {{ end }}
 
+{{ define "security_headers"}}
+  add_header Referrer-Policy "no-referrer";
+  add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+  add_header X-Frame-Options "sameorigin";
+  add_header X-Content-Type-Options "nosniff";
+  add_header X-XSS-Protection "1; mode=block";
+{{ end }}
+
 # If we receive X-Forwarded-Proto, pass it through; otherwise, pass along the
 # scheme used to connect to this server
 map $http_x_forwarded_proto $proxy_x_forwarded_proto {
@@ -61,24 +69,7 @@ access_log off;
 server_tokens off;
 
 include /etc/nginx/referral-spam.conf;
-{{ if (exists "/etc/nginx/proxy.conf") }}
 include /etc/nginx/proxy.conf;
-{{ else }}
-# HTTP 1.1 support
-proxy_http_version 1.1;
-proxy_buffering off;
-proxy_set_header Host $http_host;
-proxy_set_header Upgrade $http_upgrade;
-proxy_set_header Connection $proxy_connection;
-proxy_set_header X-Real-IP $remote_addr;
-proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-proxy_set_header X-Forwarded-Proto $proxy_x_forwarded_proto;
-proxy_set_header X-Forwarded-Ssl $proxy_x_forwarded_ssl;
-proxy_set_header X-Forwarded-Port $proxy_x_forwarded_port;
-
-# Mitigate httpoxy attack (see README for details)
-proxy_set_header Proxy "";
-{{ end }}
 
 {{ $enable_ipv6 := eq (or ($.Env.ENABLE_IPV6) "") "true" }}
 server {
@@ -101,7 +92,7 @@ server {
   access_log /var/log/nginx/access.log vhost;
   return 444;
 
-  add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+  {{ template "security_headers" . }}
 
   ssl_session_tickets off;
   ssl_certificate /etc/nginx/certs/default.crt;
@@ -196,7 +187,7 @@ server {
   {{ end }}
   access_log /var/log/nginx/access.log vhost;
 
-  add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+  {{ template "security_headers" . }}
 
   ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
   ssl_ciphers 'ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:!DSS';
@@ -292,7 +283,7 @@ server {
   access_log /var/log/nginx/access.log vhost;
   return 444;
 
-  add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+  {{ template "security_headers" . }}
 
   ssl_certificate /etc/nginx/certs/default.crt;
   ssl_certificate_key /etc/nginx/certs/default.key;
