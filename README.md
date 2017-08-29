@@ -26,6 +26,7 @@ Arch Linux setup script to obtain a full VPS with Automatic Reverse Proxy withou
 - [gogs](https://gogs.io/) ( [gogs.sh](modules/gogs.sh) )
 - [WebDAV](https://hub.docker.com/r/idelsink/webdav/) ( [webdav.sh](modules/webdav.sh) )
 - [Typo3](https://typo3.org/) ( [typo3.sh](modules/typo3.sh) )
+- Atlassian Stack: [JIRA](https://www.atlassian.com/software/jira) + [Confluence](https://www.atlassian.com/software/confluence) + [BitBucket Server](https://bitbucket.org/product/server) ( [atlassian.sh](modules/atlassian.sh) )
 
 ## Requirements
 A clean Arch Linux install with SSH capability as root user ( or any user which has sudo powers ).
