@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration variables
-AMPACHE_DOMAIN="ampache.lan"
+AMPACHE_DOMAIN="$(basename -- "$0" .sh)"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the ampache data folders

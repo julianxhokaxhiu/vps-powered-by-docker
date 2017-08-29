@@ -2,9 +2,10 @@
 
 # Configuration variables
 LETSENCRYPT_EMAIL="foo@bar.mail"
-JIRA_DOMAIN="jira.lan"
-CONFLUENCE_DOMAIN="confluence.lan"
-BITBUCKET_DOMAIN="bitbucket.lan"
+DOMAIN="$(basename -- "$0" .sh)"
+JIRA_DOMAIN="jira.$DOMAIN"
+CONFLUENCE_DOMAIN="confluence.$DOMAIN"
+BITBUCKET_DOMAIN="bitbucket.$DOMAIN"
 
 # Prepare JIRA data folder
 echo ">> Creating /srv/data/$JIRA_DOMAIN folder..."

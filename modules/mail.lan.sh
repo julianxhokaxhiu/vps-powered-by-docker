@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration variables
-MAILSERVER_DOMAIN="mail.lan"
+MAILSERVER_DOMAIN="$(basename -- "$0" .sh)"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the Mail Server data folder

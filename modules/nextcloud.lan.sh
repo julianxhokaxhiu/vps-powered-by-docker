@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration variables
-NEXTCLOUD_DOMAIN="nextcloud.lan"
+NEXTCLOUD_DOMAIN="$(basename -- "$0" .sh)"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the Nextcloud data folder

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration variables
-KOEL_DOMAIN="koel.lan"
+KOEL_DOMAIN="$(basename -- "$0" .sh)"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the koel data folders

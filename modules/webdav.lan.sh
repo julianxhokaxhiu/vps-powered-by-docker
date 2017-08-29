@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration variables
-WEBDAV_DOMAIN="webdav.lan"
+WEBDAV_DOMAIN="$(basename -- "$0" .sh)"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Install WebDAV

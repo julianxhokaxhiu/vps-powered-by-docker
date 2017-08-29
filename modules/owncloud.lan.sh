@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration variables
-OWNCLOUD_DOMAIN="owncloud.lan"
+OWNCLOUD_DOMAIN="$(basename -- "$0" .sh)"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the ownCloud data folder

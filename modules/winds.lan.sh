@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WINDS_DOMAIN="winds.lan"
+WINDS_DOMAIN="$(basename -- "$0" .sh)"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the app data folders

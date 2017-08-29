@@ -11,22 +11,22 @@ Arch Linux setup script to obtain a full VPS with Automatic Reverse Proxy withou
 - [apache-nginx-referral-spam-blacklist](https://github.com/Stevie-Ray/apache-nginx-referral-spam-blacklist) preloaded for every host
 
 ## Modules
-- [Poste](https://poste.io) ( [mail_server.sh](modules/mail_server.sh) )
-- [UI for Docker](https://github.com/kevana/ui-for-docker) ( [ui_for_docker.sh](modules/ui_for_docker.sh) )
-- [Portainer](https://github.com/portainer/portainer) ( [portainer.sh](modules/portainer.sh) )
-- [Rainloop](http://www.rainloop.net/) ( [rainloop.sh](modules/rainloop.sh) )
-- [Winds](http://winds.getstream.io/) ( [getstream_winds.sh](modules/getstream_winds.sh) )
-- [Lineage](http://lineageos.org/) [CI/CD](https://github.com/julianxhokaxhiu/docker-lineage-cicd) + [OTA](https://github.com/julianxhokaxhiu/LineageOTA) ( [lineage_cicd_ota.sh](modules/lineage_cicd_ota.sh) )
-- [DNS Server](https://github.com/julianxhokaxhiu/docker-powerdns) ( [dns_server.sh](modules/dns_server.sh) )
-- [ownCloud](https://owncloud.org/) ( [owncloud.sh](modules/owncloud.sh) )
-- [Nextcloud](https://nextcloud.com/) ( [nextcloud.sh](modules/nextcloud.sh) )
-- [koel](https://koel.phanan.net/) ( [koel.sh](modules/koel.sh) )
-- [ampache](http://ampache.org/) ( [ampache.sh](modules/ampache.sh) )
-- [goaccess](https://goaccess.io/) ( [goaccess.sh](modules/goaccess.sh) )
-- [gogs](https://gogs.io/) ( [gogs.sh](modules/gogs.sh) )
-- [WebDAV](https://hub.docker.com/r/idelsink/webdav/) ( [webdav.sh](modules/webdav.sh) )
-- [Typo3](https://typo3.org/) ( [typo3.sh](modules/typo3.sh) )
-- Atlassian Stack: [JIRA](https://www.atlassian.com/software/jira) + [Confluence](https://www.atlassian.com/software/confluence) + [BitBucket Server](https://bitbucket.org/product/server) ( [atlassian.sh](modules/atlassian.sh) )
+- [ampache](http://ampache.org/) ( [ampache.lan.sh](modules/ampache.lan.sh) )
+- Atlassian Stack: [JIRA](https://www.atlassian.com/software/jira) + [Confluence](https://www.atlassian.com/software/confluence) + [BitBucket Server](https://bitbucket.org/product/server) ( [atlassian.lan.sh](modules/atlassian.lan.sh) )
+- [DNS Server](https://github.com/julianxhokaxhiu/docker-powerdns) ( [dns.lan.sh](modules/dns.lan.sh) )
+- [goaccess](https://goaccess.io/) ( [goaccess.lan.sh](modules/goaccess.lan.sh) )
+- [gogs](https://gogs.io/) ( [gogs.lan.sh](modules/gogs.lan.sh) )
+- [koel](https://koel.phanan.net/) ( [koel.lan.sh](modules/koel.lan.sh) )
+- [Lineage](http://lineageos.org/) [CI/CD](https://github.com/julianxhokaxhiu/docker-lineage-cicd) + [OTA](https://github.com/julianxhokaxhiu/LineageOTA) ( [lineage.lan.sh](modules/lineage.lan.sh) )
+- [Poste](https://poste.io) ( [mail.lan.sh](modules/mail.lan.sh) )
+- [Nextcloud](https://nextcloud.com/) ( [nextcloud.lan.sh](modules/nextcloud.lan.sh) )
+- [ownCloud](https://owncloud.org/) ( [owncloud.lan.sh](modules/owncloud.lan.sh) )
+- [Portainer](https://github.com/portainer/portainer) ( [portainer.lan.sh](modules/portainer.lan.sh) )
+- [Rainloop](http://www.rainloop.net/) ( [rainloop.lan.sh](modules/rainloop.lan.sh) )
+- [Typo3](https://typo3.org/) ( [typo3.lan.sh](modules/typo3.lan.sh) )
+- [UI for Docker](https://github.com/kevana/ui-for-docker) ( [ui-for-docker.lan.sh](modules/ui-for-docker.lan.sh) )
+- [WebDAV](https://hub.docker.com/r/idelsink/webdav/) ( [webdav.lan.sh](modules/webdav.lan.sh) )
+- [Winds](http://winds.getstream.io/) ( [winds.lan.sh](modules/winds.lan.sh) )
 
 ## Requirements
 A clean Arch Linux install with SSH capability as root user ( or any user which has sudo powers ).

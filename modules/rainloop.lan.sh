@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Configuration variables
-RAINLOOP_DOMAIN="rainloop.lan"
+RAINLOOP_DOMAIN="$(basename -- "$0" .sh)"
 LETSENCRYPT_EMAIL="foo@bar.mail"
-MAILSERVER_NAME="mail-server"
+MAILSERVER_NAME="mail.lan"
 
 # Prepare the Rainloop Mail Client data folder
 echo ">> Creating /srv/data/$RAINLOOP_DOMAIN folder..."

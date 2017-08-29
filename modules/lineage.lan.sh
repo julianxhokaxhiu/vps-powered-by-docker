@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration variables
-LINOTA_DOMAIN="lineage.lan"
+LINOTA_DOMAIN="$(basename -- "$0" .sh)"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 LINCICD_NAME="lineage-cicd"
 USER_NAME="John Doe"

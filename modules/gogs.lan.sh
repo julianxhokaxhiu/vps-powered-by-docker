@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Configuration variables
-GOGS_DOMAIN="gogs.lan"
+GOGS_DOMAIN="$(basename -- "$0" .sh)"
 GOGS_SSHPORT="10022"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 GOGS_WITHCICD=true
-DRONE_DOMAIN="drone.lan"
+DRONE_DOMAIN="drone.$GOGS_DOMAIN"
 DRONE_SECRET="3ada3f2b-94c5-463d-bbb8-97991054687a"
 DRONE_SERVER_NAME="drone-server"
 DRONE_AGENT_NAME="drone-agent"

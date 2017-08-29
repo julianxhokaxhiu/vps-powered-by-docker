@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration variables
-GOACCESS_DOMAIN="goaccess.lan"
+GOACCESS_DOMAIN="$(basename -- "$0" .sh)"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the goaccess data folders

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration variables
-TYPO3_DOMAIN="typo3.lan"
+TYPO3_DOMAIN="$(basename -- "$0" .sh)"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 MYSQL_DATABASE="typo3"
 MYSQL_USER="typo3"
@@ -21,7 +21,7 @@ echo ">> Creating Database docker ( only if it doesn't already exist )..."
 docker run \
     -d \
     --restart=always \
-    --name="$TYPO3_DOMAIN-db" \
+    --name="db.$TYPO3_DOMAIN" \
     -e "MYSQL_DATABASE=$MYSQL_DATABASE" \
     -e "MYSQL_USER=$MYSQL_USER" \
     -e "MYSQL_PASSWORD=$MYSQL_PASSWORD" \
@@ -37,7 +37,7 @@ docker run \
     -d \
     --name="$TYPO3_DOMAIN" \
     --restart=always \
-    --link="$TYPO3_DOMAIN-db:db" \
+    --link="db.$TYPO3_DOMAIN:db" \
     -e "VIRTUAL_HOST=$TYPO3_DOMAIN" \
     -e "LETSENCRYPT_HOST=$TYPO3_DOMAIN" \
     -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
