@@ -2,7 +2,6 @@
 
 # Configuration variables
 AMPACHE_DOMAIN="ampache.lan"
-AMPACHE_NAME="ampache"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the ampache data folders
@@ -14,7 +13,7 @@ mkdir -p "/srv/dbs/$AMPACHE_DOMAIN" &>/dev/null
 echo ">> Running ampache..."
 docker run \
     -d \
-    --name="$AMPACHE_NAME" \
+    --name="$AMPACHE_DOMAIN" \
     --restart=always \
     -e "VIRTUAL_HOST=$AMPACHE_DOMAIN" \
     -e "LETSENCRYPT_HOST=$AMPACHE_DOMAIN" \
@@ -26,7 +25,7 @@ docker run \
 
 # Wait until the docker is up and running
 echo -n ">> Waiting for ampache to start..."
-while [ ! $(docker top $AMPACHE_NAME &>/dev/null && echo $?) ]
+while [ ! $(docker top $AMPACHE_DOMAIN &>/dev/null && echo $?) ]
 do
     echo -n "."
     sleep 0.5

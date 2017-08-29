@@ -1,7 +1,6 @@
 #!/bin/bash
 
 WINDS_DOMAIN="winds.lan"
-WINDS_NAME="getstream-winds"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the app data folders
@@ -14,7 +13,7 @@ mkdir -p /srv/dbs/$WINDS_DOMAIN &>/dev/null
 echo ">> Running GetStream Winds..."
 docker run \
     --restart=always \
-    --name="$WINDS_NAME" \
+    --name="$WINDS_DOMAIN" \
     -d \
     -e "VIRTUAL_HOST=$WINDS_DOMAIN" \
     -e "LETSENCRYPT_HOST=$WINDS_DOMAIN" \
@@ -31,7 +30,7 @@ docker run \
 
 # Wait until the docker is up and running
 echo -n ">> Waiting for GetStream Winds to start..."
-while [ ! $(docker top $WINDS_NAME &>/dev/null && echo $?) ]
+while [ ! $(docker top $WINDS_DOMAIN &>/dev/null && echo $?) ]
 do
     echo -n "."
     sleep 0.5

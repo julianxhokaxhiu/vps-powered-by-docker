@@ -2,7 +2,6 @@
 
 # Configuration variables
 RAINLOOP_DOMAIN="rainloop.lan"
-RAINLOOP_NAME="rainloop-mail-client"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 MAILSERVER_NAME="mail-server"
 
@@ -14,7 +13,7 @@ mkdir -p "/srv/data/$RAINLOOP_DOMAIN" &>/dev/null
 echo ">> Running Rainloop Mail Client..."
 docker run \
     -d \
-    --name="$RAINLOOP_NAME" \
+    --name="$RAINLOOP_DOMAIN" \
     --restart=always \
     -v "/srv/data/$RAINLOOP_DOMAIN:/var/www/html/data" \
     --link="$MAILSERVER_NAME:mail-server" \
@@ -27,7 +26,7 @@ docker run \
 
 # Wait until the docker is up and running
 echo -n ">> Waiting for Rainloop Mail Client to start..."
-while [ ! $(docker top $RAINLOOP_NAME &>/dev/null && echo $?) ]
+while [ ! $(docker top $RAINLOOP_DOMAIN &>/dev/null && echo $?) ]
 do
     echo -n "."
     sleep 0.5

@@ -2,7 +2,6 @@
 
 # Configuration variables
 KOEL_DOMAIN="koel.lan"
-KOEL_NAME="koel"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the koel data folders
@@ -14,7 +13,7 @@ echo ">> Running koel container..."
 docker run \
     -d \
     --restart=always \
-    --name="$KOEL_NAME" \
+    --name="$KOEL_DOMAIN" \
     -e "VIRTUAL_HOST=$KOEL_DOMAIN" \
     -e "VIRTUAL_PORT=8050" \
     -e "LETSENCRYPT_HOST=$KOEL_DOMAIN" \
@@ -26,7 +25,7 @@ docker run \
 
 # Wait until the docker is up and running
 echo -n ">> Waiting for koel to start..."
-while [ ! $(docker top $KOEL_NAME &>/dev/null && echo $?) ]
+while [ ! $(docker top $KOEL_DOMAIN &>/dev/null && echo $?) ]
 do
     echo -n "."
     sleep 0.5

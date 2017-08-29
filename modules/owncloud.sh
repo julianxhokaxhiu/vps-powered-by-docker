@@ -2,7 +2,6 @@
 
 # Configuration variables
 OWNCLOUD_DOMAIN="owncloud.lan"
-OWNCLOUD_NAME="owncloud"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the ownCloud data folder
@@ -15,7 +14,7 @@ mkdir -p "/srv/data/$OWNCLOUD_DOMAIN/data" &>/dev/null
 echo ">> Running ownCloud..."
 docker run \
     -d \
-    --name="$OWNCLOUD_NAME" \
+    --name="$OWNCLOUD_DOMAIN" \
     --restart=always \
     -e "VIRTUAL_HOST=$OWNCLOUD_DOMAIN" \
     -e "LETSENCRYPT_HOST=$OWNCLOUD_DOMAIN" \
@@ -27,7 +26,7 @@ docker run \
 
 # Wait until the docker is up and running
 echo -n ">> Waiting for ownCloud to start..."
-while [ ! $(docker top $OWNCLOUD_NAME &>/dev/null && echo $?) ]
+while [ ! $(docker top $OWNCLOUD_DOMAIN &>/dev/null && echo $?) ]
 do
     echo -n "."
     sleep 0.5

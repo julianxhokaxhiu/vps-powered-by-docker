@@ -2,7 +2,6 @@
 
 # Configuration variables
 LINOTA_DOMAIN="lineage.lan"
-LINOTA_NAME="lineage-ota"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 LINCICD_NAME="lineage-cicd"
 USER_NAME="John Doe"
@@ -16,8 +15,8 @@ CLEAN_AFTER_BUILD=true # Set to false to never clean the output folder of the bu
 WITH_SU=true # Set to false if you don't want root capabilities built-in inside the ROM
 
 # Prepare the Lineage OTA data folder
-echo ">> Creating /srv/data/$LINOTA_NAME folder..."
-mkdir -p "/srv/data/$LINOTA_NAME" &>/dev/null
+echo ">> Creating /srv/data/$LINOTA_DOMAIN folder..."
+mkdir -p "/srv/data/$LINOTA_DOMAIN" &>/dev/null
 
 # Prepare the Lineage CICD data folder
 echo ">> Creating /srv/data/$LINCICD_NAME folder..."
@@ -29,9 +28,9 @@ mkdir -p "/srv/data/$LINCICD_NAME/local_manifests" &>/dev/null
 echo ">> Running Lineage OTA Server..."
 docker run \
     -d \
-    --name="$LINOTA_NAME" \
+    --name="$LINOTA_DOMAIN" \
     --restart=always \
-    -v "/srv/data/$LINOTA_NAME:/var/www/html/builds/full" \
+    -v "/srv/data/$LINOTA_DOMAIN:/var/www/html/builds/full" \
     -e "VIRTUAL_HOST=$LINOTA_DOMAIN" \
     -e "LETSENCRYPT_HOST=$LINOTA_DOMAIN" \
     -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
@@ -39,7 +38,7 @@ docker run \
 
 # Wait until the docker is up and running
 echo -n ">> Waiting for Lineage OTA Server to start..."
-while [ ! $(docker top $LINOTA_NAME &>/dev/null && echo $?) ]
+while [ ! $(docker top $LINOTA_DOMAIN &>/dev/null && echo $?) ]
 do
     echo -n "."
     sleep 0.5
@@ -64,7 +63,7 @@ docker run \
     -v "/srv/data/$LINCICD_NAME/ccache:/srv/ccache" \
     -v "/srv/data/$LINCICD_NAME/src:/srv/src" \
     -v "/srv/data/$LINCICD_NAME/local_manifests:/srv/local_manifests" \
-    -v "/srv/data/$LINOTA_NAME:/srv/zips" \
+    -v "/srv/data/$LINOTA_DOMAIN:/srv/zips" \
     julianxhokaxhiu/docker-lineage-cicd &>/dev/null
 
 # Print friendly done message

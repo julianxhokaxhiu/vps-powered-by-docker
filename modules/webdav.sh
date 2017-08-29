@@ -2,14 +2,13 @@
 
 # Configuration variables
 WEBDAV_DOMAIN="webdav.lan"
-WEBDAV_NAME="webdav"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Install WebDAV
 echo ">> Running WebDAV..."
 docker run \
     --restart=always \
-    --name="$WEBDAV_NAME" \
+    --name="$WEBDAV_DOMAIN" \
     -d \
     -e "USERNAME=user" \
     -e "PASSWORD=pass" \
@@ -21,7 +20,7 @@ docker run \
 
 # Wait until the docker is up and running
 echo -n ">> Waiting for WebDAV to start..."
-while [ ! $(docker top $WEBDAV_NAME &>/dev/null && echo $?) ]
+while [ ! $(docker top $WEBDAV_DOMAIN &>/dev/null && echo $?) ]
 do
     echo -n "."
     sleep 0.5

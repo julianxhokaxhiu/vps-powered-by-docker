@@ -2,7 +2,6 @@
 
 # Configuration variables
 MAILSERVER_DOMAIN="mail.lan"
-MAILSERVER_NAME="mail-server"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the Mail Server data folder
@@ -13,7 +12,7 @@ mkdir -p /srv/mail &>/dev/null
 echo ">> Running Mail server..."
 docker run \
     -d \
-    --name="$MAILSERVER_NAME" \
+    --name="$MAILSERVER_DOMAIN" \
     --restart=always \
     --expose=80 \
     --expose=443 \
@@ -35,7 +34,7 @@ docker run \
 
 # Wait until the docker is up and running
 echo -n ">> Waiting for Mail server to start..."
-while [ ! $(docker top $MAILSERVER_NAME &>/dev/null && echo $?) ]
+while [ ! $(docker top $MAILSERVER_DOMAIN &>/dev/null && echo $?) ]
 do
     echo -n "."
     sleep 0.5
@@ -60,7 +59,7 @@ done
 echo "created!"
 
 # Hard Link them to the relative SSL directory, in order to use them internally also for SMTP, IMAP and POP3
-echo -n ">> Linking Let's Encrypt Certificates to the newly created $MAILSERVER_NAME docker..."
+echo -n ">> Linking Let's Encrypt Certificates to the newly created $MAILSERVER_DOMAIN docker..."
 ln /srv/certs/$MAILSERVER_DOMAIN/fullchain.pem /srv/mail/ssl/server.crt
 ln /srv/certs/$MAILSERVER_DOMAIN/key.pem /srv/mail/ssl/server.key
 
@@ -68,9 +67,9 @@ ln /srv/certs/$MAILSERVER_DOMAIN/key.pem /srv/mail/ssl/server.key
 touch /srv/mail/ssl/ca.crt
 
 # Finally restart poste.io Docker in order to use these SSL certificate from now on
-echo -n ">> Restarting $MAILSERVER_NAME Docker..."
-docker stop $MAILSERVER_NAME
-docker start $MAILSERVER_NAME
+echo -n ">> Restarting $MAILSERVER_DOMAIN Docker..."
+docker stop $MAILSERVER_DOMAIN
+docker start $MAILSERVER_DOMAIN
 
 # Print friendly done message
 echo "-----------------------------------------------------"

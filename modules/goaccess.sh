@@ -2,7 +2,6 @@
 
 # Configuration variables
 GOACCESS_DOMAIN="goaccess.lan"
-GOACCESS_NAME="goaccess"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the goaccess data folders
@@ -13,7 +12,7 @@ mkdir -p "/srv/data/$GOACCESS_DOMAIN" &>/dev/null
 echo ">> Running Goaccess..."
 docker run \
     --restart=always \
-    --name="$GOACCESS_NAME" \
+    --name="$GOACCESS_DOMAIN" \
     -d \
     -e "VIRTUAL_HOST=$GOACCESS_DOMAIN" \
     -e "VIRTUAL_PORT=7890" \
@@ -24,7 +23,7 @@ docker run \
 
 # Wait until the docker is up and running
 echo -n ">> Waiting for Goaccess to start..."
-while [ ! $(docker top $GOACCESS_NAME &>/dev/null && echo $?) ]
+while [ ! $(docker top $GOACCESS_DOMAIN &>/dev/null && echo $?) ]
 do
     echo -n "."
     sleep 0.5

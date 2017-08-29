@@ -2,7 +2,6 @@
 
 # Configuration variables
 DNSSERVER_DOMAIN="dns.lan"
-DNSSERVER_NAME="dns-server"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 CUSTOM_DNS="8.8.8.8;8.8.4.4;[2001:4860:4860::8888];[2001:4860:4860::8844]"
 API_KEY=""

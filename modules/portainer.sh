@@ -2,14 +2,13 @@
 
 # Configuration variables
 PORTAINER_DOMAIN="portainer.lan"
-PORTAINER_NAME="portainer"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Install Portainer
 echo ">> Running Portainer..."
 docker run \
     --restart=always \
-    --name="$PORTAINER_NAME" \
+    --name="$PORTAINER_DOMAIN" \
     --privileged \
     -d \
     -v /var/run/docker.sock:/var/run/docker.sock \
@@ -21,7 +20,7 @@ docker run \
 
 # Wait until the docker is up and running
 echo -n ">> Waiting for Portainer to start..."
-while [ ! $(docker top $PORTAINER_NAME &>/dev/null && echo $?) ]
+while [ ! $(docker top $PORTAINER_DOMAIN &>/dev/null && echo $?) ]
 do
     echo -n "."
     sleep 0.5

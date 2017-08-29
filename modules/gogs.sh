@@ -2,7 +2,6 @@
 
 # Configuration variables
 GOGS_DOMAIN="gogs.lan"
-GOGS_NAME="gogs"
 GOGS_SSHPORT="10022"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 GOGS_WITHCICD=true
@@ -19,7 +18,7 @@ mkdir -p "/srv/data/$GOGS_DOMAIN" &>/dev/null
 echo ">> Running Gogs..."
 docker run \
     --restart=always \
-    --name="$GOGS_NAME" \
+    --name="$GOGS_DOMAIN" \
     -d \
     --network-alias="$GOGS_DOMAIN" \
     -p "$GOGS_SSHPORT:22" \
@@ -29,6 +28,15 @@ docker run \
     -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -v "/srv/data/$GOGS_DOMAIN:/data" \
     gogs/gogs &>/dev/null
+
+# Wait until the docker is up and running
+echo -n ">> Waiting for Gogs to start..."
+while [ ! $(docker top $GOGS_DOMAIN &>/dev/null && echo $?) ]
+do
+    echo -n "."
+    sleep 0.5
+done
+echo "started!"
 
 # Run CICD if enabled
 if [ $GOGS_WITHCICD == true ]; then
@@ -88,15 +96,6 @@ if [ $GOGS_WITHCICD == true ]; then
   done
   echo "started!"
 fi
-
-# Wait until the docker is up and running
-echo -n ">> Waiting for Gogs to start..."
-while [ ! $(docker top $GOGS_NAME &>/dev/null && echo $?) ]
-do
-    echo -n "."
-    sleep 0.5
-done
-echo "started!"
 
 # Print friendly done message
 echo "-----------------------------------------------------"

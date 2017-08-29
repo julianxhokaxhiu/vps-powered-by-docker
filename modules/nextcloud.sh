@@ -2,7 +2,6 @@
 
 # Configuration variables
 NEXTCLOUD_DOMAIN="nextcloud.lan"
-NEXTCLOUD_NAME="nextcloud"
 LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the Nextcloud data folder
@@ -15,7 +14,7 @@ mkdir -p "/srv/data/$NEXTCLOUD_DOMAIN/data" &>/dev/null
 echo ">> Running Nextcloud..."
 docker run \
     -d \
-    --name="$NEXTCLOUD_NAME" \
+    --name="$NEXTCLOUD_DOMAIN" \
     --restart=always \
     -e "VIRTUAL_HOST=$NEXTCLOUD_DOMAIN" \
     -e "LETSENCRYPT_HOST=$NEXTCLOUD_DOMAIN" \
@@ -27,7 +26,7 @@ docker run \
 
 # Wait until the docker is up and running
 echo -n ">> Waiting for Nextcloud to start..."
-while [ ! $(docker top $NEXTCLOUD_NAME &>/dev/null && echo $?) ]
+while [ ! $(docker top $NEXTCLOUD_DOMAIN &>/dev/null && echo $?) ]
 do
     echo -n "."
     sleep 0.5
