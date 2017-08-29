@@ -43,7 +43,7 @@ find ./ -name "*.sh" -exec chmod +x {} \;
 Edit the configuration variables to fit your needs, inside every module, then
 ```bash
 ./modules/<module_name>.sh
-# example ./modules/mail_server.sh
+# example ./modules/mail.lan.sh
 ```
 
 ## Performance monitoring
