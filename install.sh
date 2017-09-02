@@ -37,8 +37,26 @@ wget -q https://raw.githubusercontent.com/julianxhokaxhiu/vps-powered-by-docker/
 echo ">> Creating /srv/vhost folder..."
 mkdir -p /srv/vhost &>/dev/null
 
+# Preparing the DNS service for containers
+echo ">> Enabling DNS Container Discovery..."
+if ! [ -f "/etc/docker/daemon.json" ]; then
+  echo "{\"bip\": \"172.17.0.1/24\",\"dns\": [\"172.17.0.1\"]}" > /etc/docker/daemon.json
+else
+  echo -e "\nIMPORTANT! ADD THIS MANUALLY TO YOUR '/etc/docker/daemon.json' FILE:\n\n{\"bip\": \"172.17.0.1/24\",\"dns\": [\"172.17.0.1\"]}\n\nTO ENABLE CONTAINER DISCOVERY IN DOCKER!\n"
+fi
+
+# Run the DNS container
+echo ">> Running DNS Container Discovery..."
+docker run \
+  --restart=always \
+  --name=docker-auto-dnsdiscovery \
+  -d \
+  -p 172.17.0.1:53:53/udp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  aacebedo/dnsdock:latest-amd64 --nameserver="8.8.8.8:53,8.8.4.4:53" &>/dev/null
+
 # Install Automatic Reverse proxy manager
-echo ">> Running Reverse Proxy docker..."
+echo ">> Running Reverse Proxy manager..."
 docker run \
     --restart=always \
     --name=docker-auto-reverse-proxy \
@@ -75,8 +93,11 @@ docker run \
   -v /var/run/docker.sock:/var/run/docker.sock \
   v2tec/watchtower --cleanup &>/dev/null
 
+# Restart the whole docker service to finalize the setup
+echo ">> Restarting Docker Daemon to complete the setup..."
+systemctl restart docker.service &>/dev/null
+
 # Print friendly done message
 echo "-----------------------------------------------------"
-echo "All right! Everything seems to be installed correctly. It's truly suggested to reboot now your system to get everything up and running."
-echo "Have a nice day!"
+echo "All right! Everything seems to be installed correctly. Have a nice day!"
 echo "-----------------------------------------------------"

@@ -5,6 +5,7 @@ Arch Linux setup script to obtain a full VPS with Automatic Reverse Proxy withou
 - IPv4/IPv6 support ( Dual Stack )
 - [Git](https://git-scm.com/)
 - [Docker](https://www.docker.com/)
+- [aacebedo/dnsdock](https://github.com/aacebedo/dnsdock) as DNS Autodiscovery on docker0 network
 - [CenturyLinkLabs/watchtower](https://github.com/CenturyLinkLabs/watchtower) as the Docker auto-update manager
 - [jwilder/nginx-proxy](https://github.com/jwilder/nginx-proxy) as Reverse Proxy
 - [alastaircoote/docker-letsencrypt-nginx-proxy-companion](https://github.com/alastaircoote/docker-letsencrypt-nginx-proxy-companion) as automatic Let's Encrypt provisioner ( official companion docker for jwilder/nginx-proxy )
