@@ -16,7 +16,6 @@ docker run \
     --name="$RAINLOOP_DOMAIN" \
     --restart=always \
     -v "/srv/data/$RAINLOOP_DOMAIN:/var/www/html/data" \
-    --link="$MAILSERVER_NAME:mail-server" \
     -e "PHP_MAX_POST_SIZE=50M" \
     -e "PHP_MAX_UPLOAD_SIZE=25M" \
     -e "VIRTUAL_HOST=$RAINLOOP_DOMAIN" \
@@ -39,5 +38,5 @@ echo "All right! Everything seems to be installed correctly. Have a nice day!"
 echo ">> Admin URL: https://${RAINLOOP_DOMAIN}/?admin"
 echo ">> User URL: https://${RAINLOOP_DOMAIN}/"
 echo ">> Default login is \"admin\", password is \"12345\""
-echo ">> Server hostname is \"mail-server\""
+echo ">> Server hostname is \"$MAILSERVER_NAME\""
 echo "-----------------------------------------------------"

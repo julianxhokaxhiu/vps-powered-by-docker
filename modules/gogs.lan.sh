@@ -20,7 +20,7 @@ docker run \
     --restart=always \
     --name="$GOGS_DOMAIN" \
     -d \
-    --network-alias="$GOGS_DOMAIN" \
+    -l "com.dnsdock.alias=$GOGS_DOMAIN" \
     -p "$GOGS_SSHPORT:22" \
     -e "VIRTUAL_HOST=$GOGS_DOMAIN" \
     -e "VIRTUAL_PORT=3000" \
@@ -50,7 +50,7 @@ if [ $GOGS_WITHCICD == true ]; then
     --restart=always \
     --name="$DRONE_SERVER_NAME" \
     -d \
-    --network-alias="$DRONE_DOMAIN" \
+    -l "com.dnsdock.alias=$DRONE_DOMAIN" \
     -e "DRONE_SERVER_ADDR=0.0.0.0:80" \
     -e "DRONE_OPEN=true" \
     -e "DRONE_HOST=http://${DRONE_DOMAIN}" \

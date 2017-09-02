@@ -3,10 +3,11 @@
 # Configuration variables
 TYPO3_DOMAIN="$(basename -- "$0" .sh)"
 LETSENCRYPT_EMAIL="foo@bar.mail"
-MYSQL_DATABASE="typo3"
-MYSQL_USER="typo3"
-MYSQL_PASSWORD="typo3"
-MYSQL_ROOT_PASSWORD="root"
+DB_HOSTNAME="db.$TYPO3_DOMAIN"
+DB_DATABASE="typo3"
+DB_USER="typo3"
+DB_PASSWORD="typo3"
+DB_ROOT_PASSWORD="root"
 
 # Prepare the TYPO3 data folder
 echo ">> Creating folders..."
@@ -21,11 +22,12 @@ echo ">> Creating Database docker ( only if it doesn't already exist )..."
 docker run \
     -d \
     --restart=always \
-    --name="db.$TYPO3_DOMAIN" \
-    -e "MYSQL_DATABASE=$MYSQL_DATABASE" \
-    -e "MYSQL_USER=$MYSQL_USER" \
-    -e "MYSQL_PASSWORD=$MYSQL_PASSWORD" \
-    -e "MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD" \
+    --name="$DB_HOSTNAME" \
+    -l "com.dnsdock.alias=$DB_HOSTNAME" \
+    -e "DB_DATABASE=$DB_DATABASE" \
+    -e "DB_USER=$DB_USER" \
+    -e "DB_PASSWORD=$DB_PASSWORD" \
+    -e "DB_ROOT_PASSWORD=$DB_ROOT_PASSWORD" \
     -v "/srv/dbs/$TYPO3_DOMAIN:/var/lib/mysql" \
     mariadb \
     --character-set-server=utf8 \
@@ -37,7 +39,6 @@ docker run \
     -d \
     --name="$TYPO3_DOMAIN" \
     --restart=always \
-    --link="db.$TYPO3_DOMAIN:db" \
     -e "VIRTUAL_HOST=$TYPO3_DOMAIN" \
     -e "LETSENCRYPT_HOST=$TYPO3_DOMAIN" \
     -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
@@ -58,10 +59,10 @@ echo "-----------------------------------------------------"
 echo "All right! Everything seems to be installed correctly. Have a nice day!"
 echo ">> NAME: $TYPO3_DOMAIN"
 echo ">> URL: http://${TYPO3_DOMAIN}/"
-echo ">> DATABASE HOSTNAME: db"
-echo ">> DATABASE NAME: $MYSQL_DATABASE"
-echo ">> DATABSE USER USERNAME: $MYSQL_USER"
-echo ">> DATABSE USER PASSWORD: $MYSQL_PASSWORD"
+echo ">> DATABASE HOSTNAME: $DB_HOSTNAME"
+echo ">> DATABASE NAME: $DB_DATABASE"
+echo ">> DATABSE USER USERNAME: $DB_USER"
+echo ">> DATABSE USER PASSWORD: $DB_PASSWORD"
 echo ">> DATABSE ROOT USERNAME: root"
-echo ">> DATABSE ROOT PASSWORD: $MYSQL_ROOT_PASSWORD"
+echo ">> DATABSE ROOT PASSWORD: $DB_ROOT_PASSWORD"
 echo "-----------------------------------------------------"

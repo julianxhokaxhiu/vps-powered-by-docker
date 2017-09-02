@@ -25,6 +25,7 @@ docker run \
     -p 995:995 \
     -v /etc/localtime:/etc/localtime:ro \
     -v /srv/mail:/data \
+    -l "com.dnsdock.alias=$MAILSERVER_DOMAIN" \
     -e "VIRTUAL_HOST=$MAILSERVER_DOMAIN" \
     -e "LETSENCRYPT_HOST=$MAILSERVER_DOMAIN" \
     -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \

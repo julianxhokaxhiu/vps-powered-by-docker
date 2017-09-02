@@ -22,6 +22,7 @@ docker run \
     -d \
     --name="$JIRA_DOMAIN" \
     --restart=always \
+    -l "com.dnsdock.alias=$JIRA_DOMAIN" \
     -e "VIRTUAL_HOST=$JIRA_DOMAIN" \
     -e "VIRTUAL_PORT=8080" \
     -e "LETSENCRYPT_HOST=$JIRA_DOMAIN" \
@@ -56,6 +57,7 @@ docker run \
     -d \
     --name="$CONFLUENCE_DOMAIN" \
     --restart=always \
+    -l "com.dnsdock.alias=$CONFLUENCE_DOMAIN" \
     -e "VIRTUAL_HOST=$CONFLUENCE_DOMAIN" \
     -e "VIRTUAL_PORT=8090" \
     -e "LETSENCRYPT_HOST=$CONFLUENCE_DOMAIN" \
@@ -86,6 +88,7 @@ docker run \
     -d \
     --name="$BITBUCKET_DOMAIN" \
     --restart=always \
+    -l "com.dnsdock.alias=$BITBUCKET_DOMAIN" \
     -e "VIRTUAL_HOST=$BITBUCKET_DOMAIN" \
     -e "VIRTUAL_PORT=7990" \
     -e "LETSENCRYPT_HOST=$BITBUCKET_DOMAIN" \
