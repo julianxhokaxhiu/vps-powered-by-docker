@@ -53,7 +53,7 @@ docker run \
   -d \
   -p 172.17.0.1:53:53/udp \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  aacebedo/dnsdock:latest-amd64 --nameserver="8.8.8.8:53" --nameserver="8.8.4.4:53" &>/dev/null
+  aacebedo/dnsdock:latest-amd64 --nameserver="8.8.8.8:53" --nameserver="8.8.4.4:53" --alias &>/dev/null
 
 # Install Automatic Reverse proxy manager
 echo ">> Running Reverse Proxy manager..."

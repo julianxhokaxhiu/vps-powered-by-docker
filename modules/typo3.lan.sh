@@ -23,7 +23,6 @@ docker run \
     -d \
     --restart=always \
     --name="$DB_HOSTNAME" \
-    -l "com.dnsdock.alias=$DB_HOSTNAME" \
     -e "DB_DATABASE=$DB_DATABASE" \
     -e "DB_USER=$DB_USER" \
     -e "DB_PASSWORD=$DB_PASSWORD" \
