@@ -1,8 +1,13 @@
 #!/bin/bash
 
-# Install Docker
+# Install Docker, only for Arch
+PACKAGES="docker git wget"
 echo ">> Installing required packages..."
-yes '' | pacman -Sy --noprogressbar --noconfirm --needed docker git wget &>/dev/null
+if [ -f "/etc/arch-release" ]; then
+  yes '' | pacman -Sy --noprogressbar --noconfirm --needed $PACKAGES &>/dev/null
+else
+  echo "[WARNING] It seems you are not running Arch Linux. Please make sure the following packages are installed: $PACKAGES"
+fi
 
 # Enable and Start docker host service
 echo ">> Enabling docker service..."
