@@ -68,6 +68,8 @@ access_log off;
 
 server_tokens off;
 
+client_max_body_size 0;
+
 include /etc/nginx/referral-spam.conf;
 include /etc/nginx/proxy.conf;
 
