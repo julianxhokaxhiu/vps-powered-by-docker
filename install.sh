@@ -27,6 +27,7 @@ docker run \
     --restart=always \
     --name=docker-reverse-proxy \
     -d \
+    -e "DEFAULT_ACCOUNT_EMAIL=$LETSENCRYPT_EMAIL" \
     -p 172.17.0.1:53:53/udp \
     -p 80:80 \
     -p 443:443 \
