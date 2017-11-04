@@ -1,7 +1,6 @@
 #!/bin/bash
 
 WINDS_DOMAIN="$(basename -- "$0" .sh)"
-LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the app data folders
 echo ">> Creating /srv/http/$WINDS_DOMAIN folder..."
@@ -16,8 +15,6 @@ docker run \
     --name="$WINDS_DOMAIN" \
     -d \
     -e "VIRTUAL_HOST=$WINDS_DOMAIN" \
-    -e "LETSENCRYPT_HOST=$WINDS_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -e "STREAM_APP_ID=''" \
     -e "STREAM_API_KEY=''" \
     -e "STREAM_API_SECRET=''" \

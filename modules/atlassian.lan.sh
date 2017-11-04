@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Configuration variables
-LETSENCRYPT_EMAIL="foo@bar.mail"
 DOMAIN="$(basename -- "$0" .sh)"
 JIRA_DOMAIN="jira.$DOMAIN"
 CONFLUENCE_DOMAIN="confluence.$DOMAIN"
@@ -24,8 +23,6 @@ docker run \
     --restart=always \
     -e "VIRTUAL_HOST=$JIRA_DOMAIN" \
     -e "VIRTUAL_PORT=8080" \
-    -e "LETSENCRYPT_HOST=$JIRA_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -v "/srv/data/$JIRA_DOMAIN/app:/var/atlassian/jira" \
     -v "/srv/data/$JIRA_DOMAIN/logs:/opt/atlassian/jira/logs" \
     cptactionhank/atlassian-jira &>/dev/null
@@ -58,8 +55,6 @@ docker run \
     --restart=always \
     -e "VIRTUAL_HOST=$CONFLUENCE_DOMAIN" \
     -e "VIRTUAL_PORT=8090" \
-    -e "LETSENCRYPT_HOST=$CONFLUENCE_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -v "/srv/data/$CONFLUENCE_DOMAIN/app:/var/atlassian/application-data/confluence" \
     -v "/srv/data/$CONFLUENCE_DOMAIN/logs:/opt/atlassian/confluence/logs" \
     atlassian/confluence-server &>/dev/null
@@ -88,8 +83,6 @@ docker run \
     --restart=always \
     -e "VIRTUAL_HOST=$BITBUCKET_DOMAIN" \
     -e "VIRTUAL_PORT=7990" \
-    -e "LETSENCRYPT_HOST=$BITBUCKET_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -v "/srv/data/$BITBUCKET_DOMAIN/app:/var/atlassian/application-data/bitbucket" \
     -v "/srv/data/$BITBUCKET_DOMAIN/logs:/opt/atlassian/bitbucket/logs" \
     atlassian/bitbucket-server &>/dev/null

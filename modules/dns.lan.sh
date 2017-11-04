@@ -2,7 +2,6 @@
 
 # Configuration variables
 DNSSERVER_DOMAIN="$(basename -- "$0" .sh)"
-LETSENCRYPT_EMAIL="foo@bar.mail"
 CUSTOM_DNS="8.8.8.8;8.8.4.4;[2001:4860:4860::8888];[2001:4860:4860::8844]"
 API_KEY=""
 CRONTAB_TIME="0 10 * * *"
@@ -49,8 +48,6 @@ docker run \
     -e "ENABLE_ADBLOCK=$ENABLE_ADBLOCK" \
     -e "VIRTUAL_HOST=$DNSSERVER_DOMAIN" \
     -e "VIRTUAL_PORT=8080" \
-    -e "LETSENCRYPT_HOST=$DNSSERVER_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -p 53:53 \
     -p 53:53/udp \
     -v "/srv/data/$DNSSERVER_DOMAIN:/srv/data" \

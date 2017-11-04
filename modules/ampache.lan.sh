@@ -2,7 +2,6 @@
 
 # Configuration variables
 AMPACHE_DOMAIN="$(basename -- "$0" .sh)"
-LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the ampache data folders
 echo ">> Creating /srv/data/$AMPACHE_DOMAIN folders..."
@@ -16,8 +15,6 @@ docker run \
     --name="$AMPACHE_DOMAIN" \
     --restart=always \
     -e "VIRTUAL_HOST=$AMPACHE_DOMAIN" \
-    -e "LETSENCRYPT_HOST=$AMPACHE_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -v "/PATH/TO/MUSIC/ON/THE/HOST:/media:ro" \
     -v "/srv/dbs/$AMPACHE_DOMAIN:/var/lib/mysql" \
     -v "/srv/http/$AMPACHE_DOMAIN/config:/var/www/html/config" \

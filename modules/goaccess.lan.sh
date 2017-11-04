@@ -2,7 +2,6 @@
 
 # Configuration variables
 GOACCESS_DOMAIN="$(basename -- "$0" .sh)"
-LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the goaccess data folders
 echo ">> Creating /srv/data/$GOACCESS_DOMAIN folder..."
@@ -16,8 +15,6 @@ docker run \
     -d \
     -e "VIRTUAL_HOST=$GOACCESS_DOMAIN" \
     -e "VIRTUAL_PORT=7890" \
-    -e "LETSENCRYPT_HOST=$GOACCESS_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -v "/srv/data/$GOACCESS_DOMAIN:/srv/data" \
     allinurl/goaccess &>/dev/null
 

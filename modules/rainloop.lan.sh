@@ -2,7 +2,6 @@
 
 # Configuration variables
 RAINLOOP_DOMAIN="$(basename -- "$0" .sh)"
-LETSENCRYPT_EMAIL="foo@bar.mail"
 MAILSERVER_NAME="mail.lan"
 
 # Prepare the Rainloop Mail Client data folder
@@ -19,8 +18,6 @@ docker run \
     -e "PHP_MAX_POST_SIZE=50M" \
     -e "PHP_MAX_UPLOAD_SIZE=25M" \
     -e "VIRTUAL_HOST=$RAINLOOP_DOMAIN" \
-    -e "LETSENCRYPT_HOST=$RAINLOOP_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     runningman84/rainloop &>/dev/null
 
 # Wait until the docker is up and running

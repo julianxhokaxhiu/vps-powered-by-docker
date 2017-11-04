@@ -2,7 +2,6 @@
 
 # Configuration variables
 TYPO3_DOMAIN="$(basename -- "$0" .sh)"
-LETSENCRYPT_EMAIL="foo@bar.mail"
 DB_HOSTNAME="db.$TYPO3_DOMAIN"
 DB_DATABASE="typo3"
 DB_USER="typo3"
@@ -39,8 +38,6 @@ docker run \
     --name="$TYPO3_DOMAIN" \
     --restart=always \
     -e "VIRTUAL_HOST=$TYPO3_DOMAIN" \
-    -e "LETSENCRYPT_HOST=$TYPO3_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -v "/srv/http/$TYPO3_DOMAIN:/app" \
     "webdevops/php-apache:debian-8-php7" &>/dev/null
 

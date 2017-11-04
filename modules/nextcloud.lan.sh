@@ -2,7 +2,6 @@
 
 # Configuration variables
 NEXTCLOUD_DOMAIN="$(basename -- "$0" .sh)"
-LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the Nextcloud data folder
 echo ">> Creating /srv/data/$NEXTCLOUD_DOMAIN folder..."
@@ -17,8 +16,6 @@ docker run \
     --name="$NEXTCLOUD_DOMAIN" \
     --restart=always \
     -e "VIRTUAL_HOST=$NEXTCLOUD_DOMAIN" \
-    -e "LETSENCRYPT_HOST=$NEXTCLOUD_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -v "/srv/data/$NEXTCLOUD_DOMAIN/apps:/var/www/html/apps" \
     -v "/srv/data/$NEXTCLOUD_DOMAIN/config:/var/www/html/config" \
     -v "/srv/data/$NEXTCLOUD_DOMAIN/data:/var/www/html/data" \

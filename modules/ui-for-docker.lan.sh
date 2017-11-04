@@ -2,7 +2,6 @@
 
 # Configuration variables
 UIFORDOCKER_DOMAIN="$(basename -- "$0" .sh)"
-LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Install UI for Docker
 echo ">> Running UI for Docker..."
@@ -14,8 +13,6 @@ docker run \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -e "VIRTUAL_HOST=$UIFORDOCKER_DOMAIN" \
     -e "VIRTUAL_PORT=9000" \
-    -e "LETSENCRYPT_HOST=$UIFORDOCKER_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     uifd/ui-for-docker &>/dev/null
 
 # Wait until the docker is up and running

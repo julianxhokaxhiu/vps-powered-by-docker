@@ -2,7 +2,6 @@
 
 # Configuration variables
 WEBDAV_DOMAIN="$(basename -- "$0" .sh)"
-LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Install WebDAV
 echo ">> Running WebDAV..."
@@ -13,8 +12,6 @@ docker run \
     -e "USERNAME=user" \
     -e "PASSWORD=pass" \
     -e "VIRTUAL_HOST=$WEBDAV_DOMAIN" \
-    -e "LETSENCRYPT_HOST=$WEBDAV_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -v "/PATH/TO/LOCATION:/webdav" \
     idelsink/webdav &>/dev/null
 

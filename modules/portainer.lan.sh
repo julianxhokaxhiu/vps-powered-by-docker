@@ -2,7 +2,6 @@
 
 # Configuration variables
 PORTAINER_DOMAIN="$(basename -- "$0" .sh)"
-LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Install Portainer
 echo ">> Running Portainer..."
@@ -14,8 +13,6 @@ docker run \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -e "VIRTUAL_HOST=$PORTAINER_DOMAIN" \
     -e "VIRTUAL_PORT=9000" \
-    -e "LETSENCRYPT_HOST=$PORTAINER_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     portainer/portainer &>/dev/null
 
 # Wait until the docker is up and running

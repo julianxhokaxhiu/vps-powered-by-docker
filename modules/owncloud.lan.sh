@@ -2,7 +2,6 @@
 
 # Configuration variables
 OWNCLOUD_DOMAIN="$(basename -- "$0" .sh)"
-LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the ownCloud data folder
 echo ">> Creating /srv/data/$OWNCLOUD_DOMAIN folder..."
@@ -17,8 +16,6 @@ docker run \
     --name="$OWNCLOUD_DOMAIN" \
     --restart=always \
     -e "VIRTUAL_HOST=$OWNCLOUD_DOMAIN" \
-    -e "LETSENCRYPT_HOST=$OWNCLOUD_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -v "/srv/data/$OWNCLOUD_DOMAIN/apps:/var/www/html/apps" \
     -v "/srv/data/$OWNCLOUD_DOMAIN/config:/var/www/html/config" \
     -v "/srv/data/$OWNCLOUD_DOMAIN/data:/var/www/html/data" \

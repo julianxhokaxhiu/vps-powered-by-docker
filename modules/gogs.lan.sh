@@ -3,7 +3,6 @@
 # Configuration variables
 GOGS_DOMAIN="$(basename -- "$0" .sh)"
 GOGS_SSHPORT="10022"
-LETSENCRYPT_EMAIL="foo@bar.mail"
 GOGS_WITHCICD=true
 DRONE_DOMAIN="drone.$GOGS_DOMAIN"
 DRONE_SECRET="3ada3f2b-94c5-463d-bbb8-97991054687a"
@@ -23,8 +22,6 @@ docker run \
     -p "$GOGS_SSHPORT:22" \
     -e "VIRTUAL_HOST=$GOGS_DOMAIN" \
     -e "VIRTUAL_PORT=3000" \
-    -e "LETSENCRYPT_HOST=$GOGS_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -v "/srv/data/$GOGS_DOMAIN:/data" \
     gogs/gogs &>/dev/null
 
@@ -60,8 +57,6 @@ if [ $GOGS_WITHCICD == true ]; then
     -e "DRONE_GOGS_GIT_PASSWORD=gogs" \
     -e "VIRTUAL_HOST=$DRONE_DOMAIN" \
     -e "VIRTUAL_PORT=80" \
-    -e "LETSENCRYPT_HOST=$DRONE_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -v "/srv/data/$DRONE_DOMAIN:/var/lib/drone/" \
     drone/drone &>/dev/null
 

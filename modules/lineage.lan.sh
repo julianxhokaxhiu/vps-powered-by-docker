@@ -2,7 +2,6 @@
 
 # Configuration variables
 LINOTA_DOMAIN="$(basename -- "$0" .sh)"
-LETSENCRYPT_EMAIL="foo@bar.mail"
 LINCICD_NAME="lineage-cicd"
 USER_NAME="John Doe"
 USER_MAIL="john.doe@awesome.email"
@@ -32,8 +31,6 @@ docker run \
     --restart=always \
     -v "/srv/data/$LINOTA_DOMAIN:/var/www/html/builds/full" \
     -e "VIRTUAL_HOST=$LINOTA_DOMAIN" \
-    -e "LETSENCRYPT_HOST=$LINOTA_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     julianxhokaxhiu/lineageota &>/dev/null
 
 # Wait until the docker is up and running
@@ -69,5 +66,5 @@ docker run \
 # Print friendly done message
 echo "-----------------------------------------------------"
 echo "All right! Everything seems to be installed correctly. Have a nice day!"
-echo ">> URL: https://${LINOTA_DOMAIN}/"
+echo ">> URL: http://${LINOTA_DOMAIN}/"
 echo "-----------------------------------------------------"

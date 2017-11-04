@@ -2,7 +2,6 @@
 
 # Configuration variables
 KOEL_DOMAIN="$(basename -- "$0" .sh)"
-LETSENCRYPT_EMAIL="foo@bar.mail"
 
 # Prepare the koel data folders
 echo ">> Creating /srv/data/$KOEL_DOMAIN folder..."
@@ -16,8 +15,6 @@ docker run \
     --name="$KOEL_DOMAIN" \
     -e "VIRTUAL_HOST=$KOEL_DOMAIN" \
     -e "VIRTUAL_PORT=8050" \
-    -e "LETSENCRYPT_HOST=$KOEL_DOMAIN" \
-    -e "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" \
     -v "/srv/data/$KOEL_DOMAIN/config:/config" \
     -v "/etc/localtime:/etc/localtime:ro" \
     -v "/PATH/TO/MUSIC/ON/THE/HOST/:/media:ro" \
