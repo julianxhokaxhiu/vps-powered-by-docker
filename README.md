@@ -1,11 +1,14 @@
+> This repository has been superseeded by https://github.com/julianxhokaxhiu/vps-powered-by-kubernetes
+
 # vps-powered-by-docker
+
 Arch Linux setup script to obtain a full VPS with Automatic Reverse Proxy without pain
 
 ## Stack
 - IPv4/IPv6 support ( Dual Stack )
 - [Docker](https://www.docker.com/)
 - [CenturyLinkLabs/watchtower](https://github.com/CenturyLinkLabs/watchtower) as the Docker auto-update manager
-- [julianxhokaxhiu/docker-nginx-reloaded](https://github.com/julianxhokaxhiu/docker-nginx-reloaded) as Reverse Proxy, DNS and Autodiscovery manager
+- [julianxhokaxhiu/docker-nginx-reloaded](https://github.com/julianxhokaxhiu/docker-nginx-reloaded) as Reverse Proxy Docker container with Nginx, acme.sh, DNS and Autodiscovery
 
 ## Modules
 - [ampache](http://ampache.org/) ( [ampache.lan.sh](modules/ampache.lan.sh) )
@@ -44,7 +47,10 @@ Edit the configuration variables to fit your needs, inside every module, then
 # example ./modules/mail.lan.sh
 ```
 
+**WARNING:** Within this stack **every** module will get an automatic LE HTTPS certificate, if the FQDN is accepted on LE side. If yes, your HTTP domain will be redirected to HTTPS in automatic as soon as the certificate is there.
+
 ## Performance monitoring
+
 Take a look at your Docker status thanks to this awesome CLI tool called [ctop](https://github.com/bcicen/ctop).
 
 ## Disclaimer
