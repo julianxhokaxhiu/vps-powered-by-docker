@@ -1,4 +1,4 @@
-> This repository has been superseeded by https://github.com/julianxhokaxhiu/vps-powered-by-kubernetes
+> This repository has been superseeded by https://github.com/uKube/stack. DO NOT expect further updates on this project.
 
 # vps-powered-by-docker
 
