@@ -8,7 +8,7 @@ Arch Linux setup script to obtain a full VPS with Automatic Reverse Proxy withou
 - IPv4/IPv6 support ( Dual Stack )
 - [Docker](https://www.docker.com/)
 - [CenturyLinkLabs/watchtower](https://github.com/CenturyLinkLabs/watchtower) as the Docker auto-update manager
-- [julianxhokaxhiu/docker-nginx-reloaded](https://github.com/julianxhokaxhiu/docker-nginx-reloaded) as Reverse Proxy Docker container with Nginx, acme.sh, DNS and Autodiscovery
+- [julianxhokaxhiu/docker-nginx-reloaded](https://github.com/julianxhokaxhiu/docker-nginx-reloaded) as Reverse Proxy Docker container with Nginx, acme.sh and DNS on docker0
 
 ## Modules
 - [ampache](http://ampache.org/) ( [ampache.lan.sh](modules/ampache.lan.sh) )
