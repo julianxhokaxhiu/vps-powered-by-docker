@@ -1,5 +1,3 @@
-> This repository has been superseeded by https://github.com/uKube/stack. DO NOT expect further updates on this project.
-
 # vps-powered-by-docker
 
 Arch Linux setup script to obtain a full VPS with Automatic Reverse Proxy without pain
