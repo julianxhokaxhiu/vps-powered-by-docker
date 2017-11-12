@@ -65,8 +65,8 @@ touch /srv/mail/ssl/ca.crt
 
 # Finally restart poste.io Docker in order to use these SSL certificate from now on
 echo -n ">> Restarting $MAILSERVER_DOMAIN Docker..."
-docker stop $MAILSERVER_DOMAIN
-docker start $MAILSERVER_DOMAIN
+docker stop $MAILSERVER_DOMAIN &>/dev/null
+docker start $MAILSERVER_DOMAIN &>/dev/null
 
 # Print friendly done message
 echo "-----------------------------------------------------"
