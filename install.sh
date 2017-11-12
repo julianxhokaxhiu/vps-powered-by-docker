@@ -38,6 +38,12 @@ docker run \
     -v /var/run/docker.sock:/var/run/docker.sock:ro \
     julianxhokaxhiu/docker-nginx-reloaded &>/dev/null
 
+# Wait for the docker to be up and running
+while [ ! -f /srv/certs/default.key ]
+do
+    sleep 0.5
+done
+
 # Autoupdate Dockers from time to time and cleanup old images
 echo ">> Running Docker Auto-Update manager..."
 docker run \
