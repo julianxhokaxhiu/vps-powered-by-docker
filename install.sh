@@ -39,7 +39,7 @@ docker run \
     julianxhokaxhiu/docker-nginx-reloaded &>/dev/null
 
 # Wait for the docker to be up and running
-while [ ! -f /srv/certs/default.key ]
+while [ ! -f /srv/certs/dhparam.pem ]
 do
     sleep 0.5
 done
