@@ -209,6 +209,12 @@ server {
   ssl_dhparam {{ printf "/etc/nginx/certs/%s.dhparam.pem" $cert }};
   {{ end }}
 
+  {{ if (exists (printf "/etc/nginx/certs/%s.chain.pem" $cert)) }}
+  ssl_stapling on;
+  ssl_stapling_verify on;
+  ssl_trusted_certificate /etc/nginx/certs/{{ (printf "%s.chain.pem" $cert) }};
+  {{ end }}
+
   {{ if (exists (printf "/etc/nginx/vhost.d/%s" $host)) }}
   include {{ printf "/etc/nginx/vhost.d/%s" $host }};
   {{ else if (exists "/etc/nginx/vhost.d/default") }}
