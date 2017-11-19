@@ -3,6 +3,11 @@
 # Configuration variables
 WEBDAV_DOMAIN="$(basename -- "$0" .sh)"
 
+# Disable Gzip as it does not work on Windows
+cat <<EOT > "/srv/vhost/${WEBDAV_DOMAIN}"
+gzip off;
+EOT
+
 # Install WebDAV
 echo ">> Running WebDAV..."
 docker run \
