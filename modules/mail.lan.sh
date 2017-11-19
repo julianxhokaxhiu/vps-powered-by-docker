@@ -57,11 +57,13 @@ echo "created!"
 
 # Hard Link them to the relative SSL directory, in order to use them internally also for SMTP, IMAP and POP3
 echo -n ">> Linking Let's Encrypt Certificates to the newly created $MAILSERVER_DOMAIN docker..."
+rm /srv/mail/ssl/server.crt &>/dev/null
+rm /srv/mail/ssl/server.key &>/dev/null
+rm /srv/mail/ssl/ca.crt &>/dev/null
 ln /srv/certs/$MAILSERVER_DOMAIN.crt /srv/mail/ssl/server.crt
 ln /srv/certs/$MAILSERVER_DOMAIN.key /srv/mail/ssl/server.key
-
-# Create an empty CA cert so poste.io can detect our SSL certificate
-touch /srv/mail/ssl/ca.crt
+ln /srv/certs/$MAILSERVER_DOMAIN.chain.pem /srv/mail/ssl/ca.crt
+cp -f /srv/certs/dhparam.pem /srv/mail/ssl/dh4096.pem &>/dev/null
 
 # Finally restart poste.io Docker in order to use these SSL certificate from now on
 echo -n ">> Restarting $MAILSERVER_DOMAIN Docker..."
