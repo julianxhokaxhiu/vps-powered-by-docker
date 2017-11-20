@@ -6,11 +6,6 @@ WEBDAV_USER="user"
 WEBDAV_PASS="pass"
 WEBDAV_MOUNT="/tmp"
 
-# Disable Gzip as it does not work on Windows
-cat <<EOT > "/srv/vhost/${WEBDAV_DOMAIN}"
-gzip off;
-EOT
-
 # Install WebDAV
 echo ">> Running WebDAV..."
 docker run \
@@ -21,7 +16,7 @@ docker run \
     -e "PASSWORD=$WEBDAV_PASS" \
     -e "VIRTUAL_HOST=$WEBDAV_DOMAIN" \
     -v "$WEBDAV_MOUNT:/webdav" \
-    idelsink/webdav &>/dev/null
+    julianxhokaxhiu/docker-webdav &>/dev/null
 
 # Wait until the docker is up and running
 echo -n ">> Waiting for WebDAV to start..."
