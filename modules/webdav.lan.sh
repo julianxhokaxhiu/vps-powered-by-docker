@@ -2,6 +2,9 @@
 
 # Configuration variables
 WEBDAV_DOMAIN="$(basename -- "$0" .sh)"
+WEBDAV_USER="user"
+WEBDAV_PASS="pass"
+WEBDAV_MOUNT="/tmp"
 
 # Disable Gzip as it does not work on Windows
 cat <<EOT > "/srv/vhost/${WEBDAV_DOMAIN}"
@@ -14,10 +17,10 @@ docker run \
     --restart=always \
     --name="$WEBDAV_DOMAIN" \
     -d \
-    -e "USERNAME=user" \
-    -e "PASSWORD=pass" \
+    -e "USERNAME=$WEBDAV_USER" \
+    -e "PASSWORD=$WEBDAV_PASS" \
     -e "VIRTUAL_HOST=$WEBDAV_DOMAIN" \
-    -v "/PATH/TO/LOCATION:/webdav" \
+    -v "$WEBDAV_MOUNT:/webdav" \
     idelsink/webdav &>/dev/null
 
 # Wait until the docker is up and running
