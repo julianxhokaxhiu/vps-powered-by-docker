@@ -6,13 +6,12 @@ echo ">> Installing required packages..."
 if [ -f "/etc/arch-release" ]; then
   yes '' | pacman -Sy --noprogressbar --noconfirm --needed $PACKAGES &>/dev/null
 else
-  echo "[WARNING] It seems you are not running Arch Linux. Please make sure the following packages are installed: $PACKAGES"
+  echo "[WARNING] It seems you are not running Arch Linux. Please make sure you are running Arch Linux and the following packages are installed: $PACKAGES"
 fi
 
 # Enable and Start docker host service
 echo ">> Enabling docker service..."
-systemctl enable docker.service &>/dev/null
-systemctl start docker.service &>/dev/null
+systemctl enable --now docker.service &>/dev/null
 
 # Prepare required directories
 echo ">> Preparing required folders..."
