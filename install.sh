@@ -11,8 +11,7 @@ fi
 
 # Enable and Start docker host service
 echo ">> Enabling docker service..."
-systemctl enable docker.service &>/dev/null
-systemctl start docker.service &>/dev/null
+systemctl enable --now docker.service &>/dev/null
 
 # Prepare required directories
 echo ">> Preparing required folders..."
