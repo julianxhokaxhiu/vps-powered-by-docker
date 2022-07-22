@@ -34,9 +34,10 @@ A clean Arch Linux install with SSH capability as root user ( or any user which 
 wget https://github.com/julianxhokaxhiu/vps-powered-by-docker/archive/master.zip
 unzip master.zip && cd vps-powered-by-docker-master
 find ./ -name "*.sh" -exec chmod +x {} \;
-LETSENCRYPT_EMAIL="foo@bar.mail" ./install.sh
+LETSENCRYPT_ENABLE=1 LETSENCRYPT_EMAIL="foo@bar.mail" ./install.sh
 ```
 > Remember to configure with the right email the `LETSENCRYPT_EMAIL` environment variable.
+> If you don't want LETSENCRYPT at all, you can disable this part by setting LETSENCRYPT_ENABLE=0
 
 ## Module setup
 Edit the configuration variables to fit your needs, inside every module, then

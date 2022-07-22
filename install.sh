@@ -26,6 +26,7 @@ docker run \
     --restart=always \
     --name=docker-reverse-proxy \
     -d \
+    -e "LE_ACME_ENABLE=$LETSENCRYPT_ENABLE" \
     -e "ACCOUNT_EMAIL=$LETSENCRYPT_EMAIL" \
     -p 172.17.0.1:53:53/udp \
     -p 80:80 \
