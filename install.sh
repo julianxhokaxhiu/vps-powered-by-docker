@@ -51,7 +51,7 @@ docker run \
   --name=docker-autoupdate \
   -d \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  v2tec/watchtower --cleanup &>/dev/null
+  containrrr/watchtower --cleanup &>/dev/null
 
 # Preparing the DNS service for containers
 echo ">> Enabling Auto Discovery..."
