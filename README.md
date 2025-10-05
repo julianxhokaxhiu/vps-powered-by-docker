@@ -14,6 +14,7 @@ Arch Linux setup script to obtain a full VPS with Automatic Reverse Proxy withou
 - [DNS Server](https://github.com/julianxhokaxhiu/docker-powerdns) ( [dns.lan.sh](modules/dns.lan.sh) )
 - [goaccess](https://goaccess.io/) ( [goaccess.lan.sh](modules/goaccess.lan.sh) )
 - [gogs](https://gogs.io/) ( [gogs.lan.sh](modules/gogs.lan.sh) )
+- [imapsync](https://imapsync.lamiral.info/) ( [imapsync.lan.sh](modules/imapsync.lan.sh) )
 - [koel](https://koel.phanan.net/) ( [koel.lan.sh](modules/koel.lan.sh) )
 - [Lineage](http://lineageos.org/) [CI/CD](https://github.com/julianxhokaxhiu/docker-lineage-cicd) + [OTA](https://github.com/julianxhokaxhiu/LineageOTA) ( [lineage.lan.sh](modules/lineage.lan.sh) )
 - [Poste](https://poste.io) ( [mail.lan.sh](modules/mail.lan.sh) )
